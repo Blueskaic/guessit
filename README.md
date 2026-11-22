@@ -8,11 +8,17 @@ Tip: on iPhone use Share > Add to Home Screen (Android: menu > Add to Home scree
 ## How to play
 Pick one or more categories and a time limit, press start, put the phone on your forehead during the 5-second countdown.
 Others see the picture and the name. Tap the right half when you guess it, the left half to skip.
+The ⚙️ settings set the time per card, the countdown and 18+ mode (extra adult cards, and the game is renamed "אבטל הבולבול").
+
+## Analytics
+https://blueskaic.github.io/guessit/analytics/ shows plays, visits, popular categories, guess times and devices.
+Counts are anonymous counters on the free Abacus API (abacus.jasoncameron.dev, namespace `guessit-q7k2m9`); only hits from the github.io site count.
 
 ## Files
-- `content.json`: categories and items, `["Hebrew name", "English Wikipedia title"]` (prefix `he:` for a Hebrew Wikipedia title, optional 3rd value = direct image URL to force a picture)
+- `content.json`: categories and items, `["Hebrew name", "English Wikipedia title"]` (prefix `he:` for a Hebrew Wikipedia title, optional 3rd value = direct image URL to force a picture). A category's `nsfw` list holds the 18+ cards.
 - `fetch_images.py`: downloads missing pictures to `docs/img/` and regenerates `docs/cards.js` (needs Pillow)
 - `docs/index.html`: the whole game
+- `docs/analytics/index.html`: the stats page
 
 ## Change content
 ```
@@ -22,4 +28,4 @@ git add -A && git commit -m "Update cards" && git push
 GitHub Pages updates about a minute after the push.
 To replace a bad picture: change the item's title in `content.json` (or add a direct URL as 3rd value), then re-run the script.
 
-Pictures come from Wikipedia (free-licensed lead images).
+Pictures come from Wikipedia (article lead images; cartoon characters use their non-free images).

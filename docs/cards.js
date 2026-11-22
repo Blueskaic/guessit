@@ -187,14 +187,7 @@ const CATEGORIES = [
    {
     "name": "שמעון פרס",
     "img": "img/038a9b6e0044.jpg"
-   }
-  ]
- },
- {
-  "id": "singers",
-  "name": "זמרים",
-  "cover": "img/f700cfaa6254.jpg",
-  "items": [
+   },
    {
     "name": "עומר אדם",
     "img": "img/f700cfaa6254.jpg"
@@ -378,6 +371,960 @@ const CATEGORIES = [
    {
     "name": "דואה ליפה",
     "img": "img/2444914d57fd.jpg"
+   },
+   {
+    "name": "עדן גולן",
+    "img": "img/8cbc47b6dd14.jpg"
+   },
+   {
+    "name": "יובל רפאל",
+    "img": "img/96e6dbf95820.jpg"
+   },
+   {
+    "name": "חנן בן ארי",
+    "img": "img/0ea0a94b54e9.jpg"
+   },
+   {
+    "name": "עברי לידר",
+    "img": "img/df59b21b426f.jpg"
+   },
+   {
+    "name": "הראל סקעת",
+    "img": "img/543fbb13bdfd.jpg"
+   },
+   {
+    "name": "דודו אהרון",
+    "img": "img/1a9ccbeaba6f.jpg"
+   },
+   {
+    "name": "שירי מימון",
+    "img": "img/19f5b39ae8c4.jpg"
+   },
+   {
+    "name": "נינט טייב",
+    "img": "img/45d9bd685a74.jpg"
+   },
+   {
+    "name": "מרגלית צנעני",
+    "img": "img/8b12e56f1452.jpg"
+   },
+   {
+    "name": "גידי גוב",
+    "img": "img/a9882ae80cdc.jpg"
+   },
+   {
+    "name": "רביד פלוטניק",
+    "img": "img/6ec21ace0856.jpg"
+   },
+   {
+    "name": "ליאור אשכנזי",
+    "img": "img/14f49e3b2296.jpg"
+   },
+   {
+    "name": "עדיר מילר",
+    "img": "img/b935d76124e4.jpg"
+   },
+   {
+    "name": "יונית לוי",
+    "img": "img/286274a0dff6.jpg"
+   },
+   {
+    "name": "צביקה הדר",
+    "img": "img/792c31a3d52e.jpg"
+   },
+   {
+    "name": "אברי גלעד",
+    "img": "img/694b433fc18f.jpg"
+   },
+   {
+    "name": "אנה זק",
+    "img": "img/b856afbccce2.jpg"
+   },
+   {
+    "name": "עדן חסון",
+    "img": "img/4a0f85cc9497.jpg"
+   },
+   {
+    "name": "טונה",
+    "img": "img/1781d36ce375.jpg"
+   },
+   {
+    "name": "חיים טופול",
+    "img": "img/80c5860dda96.jpg"
+   },
+   {
+    "name": "יאיר לפיד",
+    "img": "img/3fa31737b276.jpg"
+   },
+   {
+    "name": "נפתלי בנט",
+    "img": "img/a875692bbf4b.jpg"
+   },
+   {
+    "name": "בני גנץ",
+    "img": "img/ee35800e7a08.jpg"
+   },
+   {
+    "name": "אביגדור ליברמן",
+    "img": "img/3078fd98f859.jpg"
+   },
+   {
+    "name": "איתמר בן גביר",
+    "img": "img/b9b3058e45d3.jpg"
+   },
+   {
+    "name": "בצלאל סמוטריץ'",
+    "img": "img/2b06e9577d32.jpg"
+   },
+   {
+    "name": "אריה דרעי",
+    "img": "img/abebb95a5a57.jpg"
+   },
+   {
+    "name": "מירי רגב",
+    "img": "img/36d6d6b986eb.jpg"
+   },
+   {
+    "name": "שרה נתניהו",
+    "img": "img/8dbee3fda4f1.jpg"
+   },
+   {
+    "name": "יאיר נתניהו",
+    "img": "img/9603933f52fa.jpg"
+   },
+   {
+    "name": "אהוד ברק",
+    "img": "img/5cec80718041.jpg"
+   },
+   {
+    "name": "אהוד אולמרט",
+    "img": "img/0e6557b4427d.jpg"
+   },
+   {
+    "name": "אריאל שרון",
+    "img": "img/293885f888af.jpg"
+   },
+   {
+    "name": "מנחם בגין",
+    "img": "img/259470ce5170.jpg"
+   },
+   {
+    "name": "משה דיין",
+    "img": "img/c90e13042c3a.jpg"
+   },
+   {
+    "name": "יצחק הרצוג",
+    "img": "img/b3c6b1f63b86.jpg"
+   },
+   {
+    "name": "משה קצב",
+    "img": "img/4dd909a5b8bd.jpg"
+   },
+   {
+    "name": "הרב עובדיה יוסף",
+    "img": "img/beda56021159.jpg"
+   },
+   {
+    "name": "הרב אמנון יצחק",
+    "img": "img/37e5e9fc4fc3.jpg"
+   },
+   {
+    "name": "תיאודור הרצל",
+    "img": "img/34c57fd2ea1b.jpg"
+   },
+   {
+    "name": "ג'ים קארי",
+    "img": "img/3290dd21bef3.jpg"
+   },
+   {
+    "name": "סקרלט ג'והנסון",
+    "img": "img/b22622f6cd51.jpg"
+   },
+   {
+    "name": "מרגו רובי",
+    "img": "img/4a5898a1a177.jpg"
+   },
+   {
+    "name": "זנדאיה",
+    "img": "img/0637b8d17a0b.jpg"
+   },
+   {
+    "name": "טימותי שאלאמה",
+    "img": "img/268aeb875659.jpg"
+   },
+   {
+    "name": "ריאן ריינולדס",
+    "img": "img/6e3e9b66ca73.jpg"
+   },
+   {
+    "name": "רוברט דאוני ג'וניור",
+    "img": "img/53ad06b743c3.jpg"
+   },
+   {
+    "name": "כריס המסוורת'",
+    "img": "img/837fe6e85081.jpg"
+   },
+   {
+    "name": "ג'ניפר לורנס",
+    "img": "img/f72f92c8efeb.jpg"
+   },
+   {
+    "name": "אמה ווטסון",
+    "img": "img/c0efd98e7074.jpg"
+   },
+   {
+    "name": "דניאל רדקליף",
+    "img": "img/9518e13536a6.jpg"
+   },
+   {
+    "name": "מריל סטריפ",
+    "img": "img/635f4417acfb.jpg"
+   },
+   {
+    "name": "אל פצ'ינו",
+    "img": "img/1c9909508d98.jpg"
+   },
+   {
+    "name": "רוברט דה נירו",
+    "img": "img/fcc8e6b844d2.jpg"
+   },
+   {
+    "name": "סילבסטר סטאלון",
+    "img": "img/bafc9abb24e9.jpg"
+   },
+   {
+    "name": "וין דיזל",
+    "img": "img/97ffbf8df44b.jpg"
+   },
+   {
+    "name": "ג'ייסון סטייתם",
+    "img": "img/cbea8e656880.jpg"
+   },
+   {
+    "name": "ניקולס קייג'",
+    "img": "img/58d28d14df1c.jpg"
+   },
+   {
+    "name": "אדם סנדלר",
+    "img": "img/dfaa815a18f3.jpg"
+   },
+   {
+    "name": "אדי מרפי",
+    "img": "img/5be53504e70a.jpg"
+   },
+   {
+    "name": "ג'ק בלאק",
+    "img": "img/ced6bcc4a4f0.jpg"
+   },
+   {
+    "name": "קווין הארט",
+    "img": "img/72bb151730fa.jpg"
+   },
+   {
+    "name": "ג'וליה רוברטס",
+    "img": "img/ced5781fe760.jpg"
+   },
+   {
+    "name": "ניקול קידמן",
+    "img": "img/cfd6abdcb181.jpg"
+   },
+   {
+    "name": "טום הולנד",
+    "img": "img/4adc73b521d9.jpg"
+   },
+   {
+    "name": "יו ג'קמן",
+    "img": "img/d756b74e5cbe.jpg"
+   },
+   {
+    "name": "ג'ורג' קלוני",
+    "img": "img/0443b143f832.jpg"
+   },
+   {
+    "name": "סמואל ל. ג'קסון",
+    "img": "img/2f2b03d65c74.jpg"
+   },
+   {
+    "name": "דנזל וושינגטון",
+    "img": "img/d1cefea029c2.jpg"
+   },
+   {
+    "name": "הריסון פורד",
+    "img": "img/9e59da77f25c.jpg"
+   },
+   {
+    "name": "ברוס ויליס",
+    "img": "img/42c8a7b2785b.jpg"
+   },
+   {
+    "name": "מל גיבסון",
+    "img": "img/d80641e19c44.jpg"
+   },
+   {
+    "name": "ברוס לי",
+    "img": "img/d19e6395ed18.jpg"
+   },
+   {
+    "name": "אודרי הפבורן",
+    "img": "img/fc3eda431d13.jpg"
+   },
+   {
+    "name": "מתיו פרי",
+    "img": "img/fb86584270e1.jpg"
+   },
+   {
+    "name": "גורדון רמזי",
+    "img": "img/8c6ba3269f12.jpg"
+   },
+   {
+    "name": "מיסטר ביסט",
+    "img": "img/6779ca4730c8.jpg"
+   },
+   {
+    "name": "קיילי ג'נר",
+    "img": "img/fe1164c06c54.jpg"
+   },
+   {
+    "name": "פריס הילטון",
+    "img": "img/eeb6eb5a7eed.jpg"
+   },
+   {
+    "name": "סלינה גומז",
+    "img": "img/401a284fda3e.jpg"
+   },
+   {
+    "name": "מיילי סיירוס",
+    "img": "img/1406a07118be.jpg"
+   },
+   {
+    "name": "קייטי פרי",
+    "img": "img/f273e8985c1c.jpg"
+   },
+   {
+    "name": "דרייק",
+    "img": "img/7968b925d7fe.jpg"
+   },
+   {
+    "name": "קניה ווסט",
+    "img": "img/729b332d2a1c.jpg"
+   },
+   {
+    "name": "סנופ דוג",
+    "img": "img/968c10f8f159.jpg"
+   },
+   {
+    "name": "ג'ניפר לופז",
+    "img": "img/e41c2d43b624.jpg"
+   },
+   {
+    "name": "הארי סטיילס",
+    "img": "img/45ebbb129017.jpg"
+   },
+   {
+    "name": "ג'סטין טימברלייק",
+    "img": "img/1629c2fdb315.jpg"
+   },
+   {
+    "name": "אלטון ג'ון",
+    "img": "img/0de86b3ed577.jpg"
+   },
+   {
+    "name": "מיק ג'אגר",
+    "img": "img/b6f1ec2958c9.jpg"
+   },
+   {
+    "name": "פול מקרטני",
+    "img": "img/d8a5441817b1.jpg"
+   },
+   {
+    "name": "וויטני יוסטון",
+    "img": "img/7369ca5523f2.jpg"
+   },
+   {
+    "name": "ניקי מינאז'",
+    "img": "img/206852b9306a.jpg"
+   },
+   {
+    "name": "סברינה קרפנטר",
+    "img": "img/6ed990a07d4a.jpg"
+   },
+   {
+    "name": "קורט קוביין",
+    "img": "img/21c862bb4502.jpg"
+   },
+   {
+    "name": "אוזי אוסבורן",
+    "img": "img/9ac8c53d0c65.jpg"
+   },
+   {
+    "name": "באד באני",
+    "img": "img/7a5fe33913ea.jpg"
+   },
+   {
+    "name": "הנסיכה דיאנה",
+    "img": "img/cabc52bca601.jpg"
+   },
+   {
+    "name": "המלך צ'ארלס",
+    "img": "img/6d57b779da0d.jpg"
+   },
+   {
+    "name": "הנסיך הארי",
+    "img": "img/fe0b32f60cfd.jpg"
+   },
+   {
+    "name": "האפיפיור פרנציסקוס",
+    "img": "img/58d4c0e73d9d.jpg"
+   },
+   {
+    "name": "הדלאי לאמה",
+    "img": "img/64a14bb24004.jpg"
+   },
+   {
+    "name": "ג'ו ביידן",
+    "img": "img/abfba24f6460.jpg"
+   },
+   {
+    "name": "קמלה האריס",
+    "img": "img/b88cb60e7723.jpg"
+   },
+   {
+    "name": "עמנואל מקרון",
+    "img": "img/9d19d1cb6930.jpg"
+   },
+   {
+    "name": "וולודימיר זלנסקי",
+    "img": "img/50eb1b313978.jpg"
+   },
+   {
+    "name": "אנגלה מרקל",
+    "img": "img/ad74e5400c00.jpg"
+   },
+   {
+    "name": "ביל קלינטון",
+    "img": "img/a7ff9e853d93.jpg"
+   },
+   {
+    "name": "אברהם לינקולן",
+    "img": "img/2f7cfa603df2.jpg"
+   },
+   {
+    "name": "נפוליאון",
+    "img": "img/811c7ce75d2b.jpg"
+   },
+   {
+    "name": "ליאונרדו דה וינצ'י",
+    "img": "img/4f9b6c6861b4.jpg"
+   },
+   {
+    "name": "וויליאם שייקספיר",
+    "img": "img/019e95a72040.jpg"
+   },
+   {
+    "name": "מוצרט",
+    "img": "img/1c82c2c7d580.jpg"
+   },
+   {
+    "name": "בטהובן",
+    "img": "img/409b9faac85e.jpg"
+   },
+   {
+    "name": "פבלו פיקאסו",
+    "img": "img/9716719fb465.jpg"
+   },
+   {
+    "name": "וינסנט ואן גוך",
+    "img": "img/4ba53b228e0f.jpg"
+   },
+   {
+    "name": "זיגמונד פרויד",
+    "img": "img/1db11a70dce1.jpg"
+   },
+   {
+    "name": "אייזק ניוטון",
+    "img": "img/d28b9a449997.jpg"
+   },
+   {
+    "name": "סטיבן הוקינג",
+    "img": "img/4e43bbc2dc5f.jpg"
+   },
+   {
+    "name": "ניקולה טסלה",
+    "img": "img/cd2d22973ef0.jpg"
+   },
+   {
+    "name": "מארי קירי",
+    "img": "img/8ee140eab9e0.jpg"
+   },
+   {
+    "name": "צ'ארלס דרווין",
+    "img": "img/09a208d72b42.jpg"
+   },
+   {
+    "name": "אדולף היטלר",
+    "img": "img/540dea05a35b.jpg"
+   },
+   {
+    "name": "יוסיף סטלין",
+    "img": "img/4ae616eb7c91.jpg"
+   },
+   {
+    "name": "בניטו מוסוליני",
+    "img": "img/fddbd3c0cae5.jpg"
+   },
+   {
+    "name": "מאו דזה-דונג",
+    "img": "img/8828761228a0.jpg"
+   },
+   {
+    "name": "קים ג'ונג-און",
+    "img": "img/dec7c70a98e2.jpg"
+   },
+   {
+    "name": "ולדימיר פוטין",
+    "img": "img/ac783b8c2e88.jpg"
+   },
+   {
+    "name": "עלי חמינאי",
+    "img": "img/5a03de080655.jpg"
+   },
+   {
+    "name": "חומייני",
+    "img": "img/2c379fab7f68.jpg"
+   },
+   {
+    "name": "חסן נסראללה",
+    "img": "img/2b53fe52668f.jpg"
+   },
+   {
+    "name": "יחיא סינוואר",
+    "img": "img/93bc0868c2f4.jpg"
+   },
+   {
+    "name": "אוסאמה בן לאדן",
+    "img": "img/ff05b5e391f3.jpg"
+   },
+   {
+    "name": "סדאם חוסיין",
+    "img": "img/9e4e0774b3f1.jpg"
+   },
+   {
+    "name": "מועמר קדאפי",
+    "img": "img/c5f52bce5a9f.jpg"
+   },
+   {
+    "name": "בשאר אל-אסד",
+    "img": "img/d904f52115ea.jpg"
+   },
+   {
+    "name": "רג'פ טאיפ ארדואן",
+    "img": "img/40fc20f578f4.jpg"
+   },
+   {
+    "name": "פידל קסטרו",
+    "img": "img/7ff5d422fa44.jpg"
+   },
+   {
+    "name": "צ'ה גווארה",
+    "img": "img/49b5f4ef1836.jpg"
+   },
+   {
+    "name": "יאסר ערפאת",
+    "img": "img/48074fce32bd.jpg"
+   },
+   {
+    "name": "אבו מאזן",
+    "img": "img/d16171e9433d.jpg"
+   },
+   {
+    "name": "פבלו אסקובר",
+    "img": "img/2d22da691c35.jpg"
+   },
+   {
+    "name": "אל קפונה",
+    "img": "img/9f97031de873.jpg"
+   },
+   {
+    "name": "ג'פרי אפשטיין",
+    "img": "img/71842f02bd56.jpg"
+   },
+   {
+    "name": "הארווי ויינשטיין",
+    "img": "img/d3b1b602572d.jpg"
+   },
+   {
+    "name": "אנדרו טייט",
+    "img": "img/9b1b7f419b9a.jpg"
+   },
+   {
+    "name": "פי דידי",
+    "img": "img/32977d467109.jpg"
+   },
+   {
+    "name": "או ג'יי סימפסון",
+    "img": "img/bdd4b08207dc.jpg"
+   },
+   {
+    "name": "צ'ארלס מנסון",
+    "img": "img/f3246402b473.jpg"
+   },
+   {
+    "name": "ברני מיידוף",
+    "img": "img/9839d883ab66.jpg"
+   },
+   {
+    "name": "ג'וליאן אסאנג'",
+    "img": "img/faa77ead7597.jpg"
+   },
+   {
+    "name": "אדוארד סנודן",
+    "img": "img/78b5fb39b6a3.jpg"
+   },
+   {
+    "name": "גרטה תונברג",
+    "img": "img/bc2b70031c3b.jpg"
+   },
+   {
+    "name": "לוגן פול",
+    "img": "img/78adea52bbf8.jpg"
+   },
+   {
+    "name": "הנסיך אנדרו",
+    "img": "img/af00b50f99cd.jpg"
+   },
+   {
+    "name": "יו הפנר",
+    "img": "img/6f749541be66.jpg",
+    "nsfw": 1
+   },
+   {
+    "name": "מיה ח'ליפה",
+    "img": "img/795c67e918bf.jpg",
+    "nsfw": 1
+   },
+   {
+    "name": "ג'וני סינס",
+    "img": "img/df8f2e725ea7.jpg",
+    "nsfw": 1
+   },
+   {
+    "name": "סטורמי דניאלס",
+    "img": "img/ddcb810a8d7f.jpg",
+    "nsfw": 1
+   },
+   {
+    "name": "ג'נה ג'יימסון",
+    "img": "img/8be3cb2123c6.jpg",
+    "nsfw": 1
+   },
+   {
+    "name": "סשה גריי",
+    "img": "img/09a3a7406cdd.jpg",
+    "nsfw": 1
+   },
+   {
+    "name": "סאני לאון",
+    "img": "img/e77e29ff990e.jpg",
+    "nsfw": 1
+   },
+   {
+    "name": "פמלה אנדרסון",
+    "img": "img/49a175399400.jpg",
+    "nsfw": 1
+   },
+   {
+    "name": "רוקו סיפרדי",
+    "img": "img/7ab27ec72a50.jpg",
+    "nsfw": 1
+   },
+   {
+    "name": "ריילי ריד",
+    "img": "img/2c55b8579240.jpg",
+    "nsfw": 1
+   },
+   {
+    "name": "לאנה רודס",
+    "img": "img/fa9333d1b27b.jpg",
+    "nsfw": 1
+   },
+   {
+    "name": "בל דלפין",
+    "img": "img/8f35c653f879.jpg",
+    "nsfw": 1
+   },
+   {
+    "name": "מוניקה לוינסקי",
+    "img": "img/7bb6c2388612.jpg",
+    "nsfw": 1
+   },
+   {
+    "name": "דיטה פון טיז",
+    "img": "img/18502d356eca.jpg",
+    "nsfw": 1
+   },
+   {
+    "name": "קזנובה",
+    "img": "img/828529bdb5ab.jpg",
+    "nsfw": 1
+   },
+   {
+    "name": "המרקיז דה סאד",
+    "img": "img/73c21afe7141.jpg",
+    "nsfw": 1
+   }
+  ]
+ },
+ {
+  "id": "cartoons",
+  "name": "דמויות מצוירות",
+  "cover": "img/15920fff53b4.jpg",
+  "items": [
+   {
+    "name": "מיקי מאוס",
+    "img": "img/15920fff53b4.jpg"
+   },
+   {
+    "name": "מיני מאוס",
+    "img": "img/1cab014419fe.jpg"
+   },
+   {
+    "name": "דונלד דאק",
+    "img": "img/4f7ad45c100c.jpg"
+   },
+   {
+    "name": "גופי",
+    "img": "img/d526ec1f94b3.jpg"
+   },
+   {
+    "name": "באגס באני",
+    "img": "img/2a4458a7f133.jpg"
+   },
+   {
+    "name": "דאפי דאק",
+    "img": "img/66e19644ab0d.jpg"
+   },
+   {
+    "name": "טוויטי",
+    "img": "img/2829cb16250b.jpg"
+   },
+   {
+    "name": "טום החתול",
+    "img": "img/2555fded6b2d.jpg"
+   },
+   {
+    "name": "ג'רי העכבר",
+    "img": "img/99b483e0269e.jpg"
+   },
+   {
+    "name": "בובספוג",
+    "img": "img/c5f6c1a1c3c6.jpg"
+   },
+   {
+    "name": "פטריק כוכב",
+    "img": "img/80d6d9004499.jpg"
+   },
+   {
+    "name": "סקווידוורד",
+    "img": "img/91e799e74aec.jpg"
+   },
+   {
+    "name": "מר קראבס",
+    "img": "img/20328ab2f85c.jpg"
+   },
+   {
+    "name": "הומר סימפסון",
+    "img": "img/57b9609b2b99.jpg"
+   },
+   {
+    "name": "בארט סימפסון",
+    "img": "img/203c44865313.jpg"
+   },
+   {
+    "name": "מארג' סימפסון",
+    "img": "img/74650cf30552.jpg"
+   },
+   {
+    "name": "פיטר גריפין",
+    "img": "img/c8471eba478d.jpg"
+   },
+   {
+    "name": "סטואי גריפין",
+    "img": "img/7c0cf702002e.jpg"
+   },
+   {
+    "name": "ריק סאנצ'ז",
+    "img": "img/70eb270e1b37.jpg"
+   },
+   {
+    "name": "אריק קרטמן",
+    "img": "img/08b758c96336.jpg"
+   },
+   {
+    "name": "פיקאצ'ו",
+    "img": "img/4b576e26f68e.jpg"
+   },
+   {
+    "name": "שרק",
+    "img": "img/08fe3fb730ee.jpg"
+   },
+   {
+    "name": "החמור משרק",
+    "img": "img/f8618b3419d1.jpg"
+   },
+   {
+    "name": "סקובי-דו",
+    "img": "img/f8b92fafa9f1.jpg"
+   },
+   {
+    "name": "גארפילד",
+    "img": "img/f7c843566646.jpg"
+   },
+   {
+    "name": "סנופי",
+    "img": "img/a61c650b67e4.jpg"
+   },
+   {
+    "name": "פופאי",
+    "img": "img/f5e1385fc60b.jpg"
+   },
+   {
+    "name": "הפנתר הוורוד",
+    "img": "img/374fe0e025c6.jpg"
+   },
+   {
+    "name": "פו הדב",
+    "img": "img/5c7ae2d55e77.jpg"
+   },
+   {
+    "name": "אלזה",
+    "img": "img/3c73fe6b2963.jpg"
+   },
+   {
+    "name": "אולף",
+    "img": "img/6e9cc3f6b212.jpg"
+   },
+   {
+    "name": "סימבה",
+    "img": "img/8d0e3879c8e4.jpg"
+   },
+   {
+    "name": "באז שנות אור",
+    "img": "img/c25eed4a54ef.jpg"
+   },
+   {
+    "name": "וודי",
+    "img": "img/41612dae59c2.jpg"
+   },
+   {
+    "name": "סופר מריו",
+    "img": "img/1cc477616bb1.jpg"
+   },
+   {
+    "name": "סוניק",
+    "img": "img/e5b92963afcc.jpg"
+   },
+   {
+    "name": "דרדסבא",
+    "img": "img/67a4809e946a.jpg"
+   },
+   {
+    "name": "פינוקיו",
+    "img": "img/610e42949651.jpg"
+   },
+   {
+    "name": "אלאדין",
+    "img": "img/dc3476aa0646.jpg"
+   },
+   {
+    "name": "הג'יני",
+    "img": "img/6b07ee39ebfc.jpg"
+   },
+   {
+    "name": "בת הים הקטנה",
+    "img": "img/3219cc7799b7.jpg"
+   },
+   {
+    "name": "המיניונים",
+    "img": "img/7b4a2d75f415.jpg"
+   },
+   {
+    "name": "גרו",
+    "img": "img/fbba97daa92e.jpg"
+   },
+   {
+    "name": "פו מקונג פו פנדה",
+    "img": "img/bddcba0aee20.jpg"
+   },
+   {
+    "name": "סטיץ'",
+    "img": "img/a4aed6809837.jpg"
+   },
+   {
+    "name": "מייק וזובסקי",
+    "img": "img/e4c4e434dc9f.jpg"
+   },
+   {
+    "name": "לייטנינג מקווין",
+    "img": "img/da3929452836.jpg"
+   },
+   {
+    "name": "שרוליק",
+    "img": "img/77f212a8a836.jpg"
+   },
+   {
+    "name": "וודי נקר העצים",
+    "img": "img/15c172393f75.jpg"
+   },
+   {
+    "name": "קספר",
+    "img": "img/6a4ee1bfb289.jpg"
+   },
+   {
+    "name": "פרד פלינסטון",
+    "img": "img/c1c3a8ab4cd9.jpg"
+   },
+   {
+    "name": "גוקו",
+    "img": "img/db388b1b18ab.jpg"
+   },
+   {
+    "name": "נארוטו",
+    "img": "img/b3bbea50bebc.jpg"
+   },
+   {
+    "name": "אש קצ'ום",
+    "img": "img/7937b423a414.jpg"
+   },
+   {
+    "name": "ג'וני בראבו",
+    "img": "img/36ddde3d57ef.jpg"
+   },
+   {
+    "name": "בטי בופ",
+    "img": "img/c1d5a032a61f.jpg"
+   },
+   {
+    "name": "הלו קיטי",
+    "img": "img/02124309c986.jpg"
+   },
+   {
+    "name": "אסטריקס",
+    "img": "img/d1e988c93930.jpg"
+   },
+   {
+    "name": "ג'סיקה ראביט",
+    "img": "img/d9235e66253c.jpg",
+    "nsfw": 1
+   },
+   {
+    "name": "גלן קווגמייר",
+    "img": "img/f2b3331816a8.jpg",
+    "nsfw": 1
+   },
+   {
+    "name": "הרברט הסוטה",
+    "img": "img/136be7f4bd83.jpg",
+    "nsfw": 1
    }
   ]
  },
@@ -807,173 +1754,16 @@ const CATEGORIES = [
    {
     "name": "וינה",
     "img": "img/601f9226a92f.jpg"
-   }
-  ]
- },
- {
-  "id": "places",
-  "name": "מקומות",
-  "cover": "img/998c24f02ed9.jpg",
-  "items": [
-   {
-    "name": "הכותל המערבי",
-    "img": "img/998c24f02ed9.jpg"
    },
    {
-    "name": "כיפת הסלע",
-    "img": "img/66e88c414fa2.jpg"
+    "name": "פטאיה",
+    "img": "img/0fd360636058.jpg",
+    "nsfw": 1
    },
    {
-    "name": "מצדה",
-    "img": "img/9c2687455917.jpg"
-   },
-   {
-    "name": "ים המלח",
-    "img": "img/bb7fdae32b58.jpg"
-   },
-   {
-    "name": "הכנרת",
-    "img": "img/09460c28c1f1.jpg"
-   },
-   {
-    "name": "מגדלי עזריאלי",
-    "img": "img/6e3b0674503c.jpg"
-   },
-   {
-    "name": "הגנים הבהאיים בחיפה",
-    "img": "img/25213ddb425b.jpg"
-   },
-   {
-    "name": "מגדל אייפל",
-    "img": "img/6e5a907e67b2.jpg"
-   },
-   {
-    "name": "פסל החירות",
-    "img": "img/6d765e7b1755.jpg"
-   },
-   {
-    "name": "החומה הסינית",
-    "img": "img/a40279d995f7.jpg"
-   },
-   {
-    "name": "טאג' מהאל",
-    "img": "img/3e80128381a0.jpg"
-   },
-   {
-    "name": "הקולוסיאום",
-    "img": "img/baaadf4e9548.jpg"
-   },
-   {
-    "name": "הפירמידות בגיזה",
-    "img": "img/eb68ba4b2d9e.jpg"
-   },
-   {
-    "name": "ביג בן",
-    "img": "img/984a5a7e3962.jpg"
-   },
-   {
-    "name": "מאצ'ו פיצ'ו",
-    "img": "img/cbbc03fbe1dc.jpg"
-   },
-   {
-    "name": "פסל ישו הגואל בריו",
-    "img": "img/769b791c87cc.jpg"
-   },
-   {
-    "name": "בית האופרה של סידני",
-    "img": "img/017b85c6be51.jpg"
-   },
-   {
-    "name": "מגדל פיזה",
-    "img": "img/d04e1b497a42.jpg"
-   },
-   {
-    "name": "מפלי הניאגרה",
-    "img": "img/9ca87d0d003a.jpg"
-   },
-   {
-    "name": "הר האוורסט",
-    "img": "img/f9e94027666b.jpg"
-   },
-   {
-    "name": "הגרנד קניון",
-    "img": "img/9167398895f4.jpg"
-   },
-   {
-    "name": "בורג' ח'ליפה",
-    "img": "img/7b1872120621.jpg"
-   },
-   {
-    "name": "סטונהנג'",
-    "img": "img/55f660030042.jpg"
-   },
-   {
-    "name": "פטרה",
-    "img": "img/a2289681db3b.jpg"
-   },
-   {
-    "name": "גשר שער הזהב",
-    "img": "img/a19fd6486866.jpg"
-   },
-   {
-    "name": "טיימס סקוור",
-    "img": "img/9b4ea6cdbea2.jpg"
-   },
-   {
-    "name": "שלט הוליווד",
-    "img": "img/d46ed2c20df9.jpg"
-   },
-   {
-    "name": "האקרופוליס",
-    "img": "img/097d5655983f.jpg"
-   },
-   {
-    "name": "סגרדה פמיליה",
-    "img": "img/e6e264e5f638.jpg"
-   },
-   {
-    "name": "טאואר ברידג'",
-    "img": "img/e79f4042b5e3.jpg"
-   },
-   {
-    "name": "הקרמלין",
-    "img": "img/1c91e6d63093.jpg"
-   },
-   {
-    "name": "ונציה",
-    "img": "img/607d28488d18.jpg"
-   },
-   {
-    "name": "סנטוריני",
-    "img": "img/80e0ebcae987.jpg"
-   },
-   {
-    "name": "הר ראשמור",
-    "img": "img/634a069d0b27.jpg"
-   },
-   {
-    "name": "האמפייר סטייט בילדינג",
-    "img": "img/bf52a32f90d0.jpg"
-   },
-   {
-    "name": "הלובר",
-    "img": "img/d97c8ad04425.jpg"
-   },
-   {
-    "name": "שער ברנדנבורג",
-    "img": "img/d7c4404ce45e.jpg"
-   },
-   {
-    "name": "טירת נוישוונשטיין",
-    "img": "img/f481a0dec865.jpg"
-   },
-   {
-    "name": "אנגקור וואט",
-    "img": "img/de308d7087db.jpg"
-   },
-   {
-    "name": "דיסנילנד",
-    "img": "img/eee86e9b0fe2.jpg"
+    "name": "רובע החלונות האדומים",
+    "img": "img/11ac902b9a8f.jpg",
+    "nsfw": 1
    }
   ]
  },
@@ -1153,6 +1943,26 @@ const CATEGORIES = [
    {
     "name": "רימון",
     "img": "img/50c5e70d567c.jpg"
+   },
+   {
+    "name": "סקס און דה ביץ'",
+    "img": "img/ce67cb03e6a2.jpg",
+    "nsfw": 1
+   },
+   {
+    "name": "אימוג'י החציל",
+    "img": "img/0a4fdaf25fb2.jpg",
+    "nsfw": 1
+   },
+   {
+    "name": "אימוג'י האפרסק",
+    "img": "img/24890b42c10b.jpg",
+    "nsfw": 1
+   },
+   {
+    "name": "עוגת חשיש",
+    "img": "img/dd13d86053dd.jpg",
+    "nsfw": 1
    }
   ]
  },
@@ -1356,6 +2166,11 @@ const CATEGORIES = [
    {
     "name": "עטלף",
     "img": "img/2d5b3d62e7bd.jpg"
+   },
+   {
+    "name": "בונובו",
+    "img": "img/c08167b71988.jpg",
+    "nsfw": 1
    }
   ]
  },
@@ -1515,431 +2330,91 @@ const CATEGORIES = [
    {
     "name": "מטף",
     "img": "img/1658a4b9260c.jpg"
-   }
-  ]
- },
- {
-  "id": "vehicles",
-  "name": "כלי תחבורה",
-  "cover": "img/e9989db5dabe.jpg",
-  "items": [
-   {
-    "name": "מכונית",
-    "img": "img/e9989db5dabe.jpg"
-   },
-   {
-    "name": "אוטובוס",
-    "img": "img/6e4b38bfd577.jpg"
-   },
-   {
-    "name": "רכבת",
-    "img": "img/e41273f43af5.jpg"
-   },
-   {
-    "name": "מטוס",
-    "img": "img/54118ed33b4e.jpg"
-   },
-   {
-    "name": "מסוק",
-    "img": "img/2ab8b43468e8.jpg"
-   },
-   {
-    "name": "אופניים",
-    "img": "img/78efcae683f1.jpg"
-   },
-   {
-    "name": "אופנוע",
-    "img": "img/5683df776e94.jpg"
-   },
-   {
-    "name": "קטנוע",
-    "img": "img/039c8e6db327.jpg"
-   },
-   {
-    "name": "קורקינט",
-    "img": "img/9c2808353bd7.jpg"
-   },
-   {
-    "name": "משאית",
-    "img": "img/6f13850d3346.jpg"
-   },
-   {
-    "name": "טרקטור",
-    "img": "img/8029d0d49e9e.jpg"
-   },
-   {
-    "name": "סירה",
-    "img": "img/f769aafbc2b8.jpg"
-   },
-   {
-    "name": "ספינת תענוגות",
-    "img": "img/6f8f88fca53b.jpg"
-   },
-   {
-    "name": "צוללת",
-    "img": "img/0d234e5bcf75.jpg"
-   },
-   {
-    "name": "מעבורת חלל",
-    "img": "img/629d424f1010.jpg"
-   },
-   {
-    "name": "טיל",
-    "img": "img/15e8bfff2c10.jpg"
-   },
-   {
-    "name": "כדור פורח",
-    "img": "img/d1172aaf75d5.jpg"
-   },
-   {
-    "name": "רכבל",
-    "img": "img/c09491655a3b.jpg"
-   },
-   {
-    "name": "טנק",
-    "img": "img/71242c9c8a85.jpg"
-   },
-   {
-    "name": "אמבולנס",
-    "img": "img/d075e43e3716.jpg"
-   },
-   {
-    "name": "כבאית",
-    "img": "img/8b4e56c45c2a.jpg"
-   },
-   {
-    "name": "רכבת תחתית",
-    "img": "img/416766a78be4.jpg"
-   },
-   {
-    "name": "רכבת קלה",
-    "img": "img/8f95e20d7297.jpg"
-   },
-   {
-    "name": "קרוואן",
-    "img": "img/a687e7a980b1.jpg"
-   },
-   {
-    "name": "קאנו",
-    "img": "img/8d3241d67b2c.jpg"
-   },
-   {
-    "name": "יאכטה",
-    "img": "img/1c8029c659ed.jpg"
-   },
-   {
-    "name": "מטוס קרב",
-    "img": "img/3ec4fbba236b.jpg"
-   },
-   {
-    "name": "טרקטורון",
-    "img": "img/30873ba8161f.jpg"
-   },
-   {
-    "name": "מלגזה",
-    "img": "img/46c0e3c736a2.jpg"
-   },
-   {
-    "name": "דחפור",
-    "img": "img/78c01dfe157c.jpg"
-   },
-   {
-    "name": "לימוזינה",
-    "img": "img/e707fa8cdb24.jpg"
-   },
-   {
-    "name": "רכבת הרים",
-    "img": "img/5241d1ba2728.jpg"
-   },
-   {
-    "name": "גונדולה",
-    "img": "img/1d09e8ceb0a9.jpg"
-   },
-   {
-    "name": "כרכרה",
-    "img": "img/f6fc8405d49c.jpg"
-   }
-  ]
- },
- {
-  "id": "instruments",
-  "name": "כלי נגינה",
-  "cover": "img/ae9b9e717bbd.jpg",
-  "items": [
-   {
-    "name": "גיטרה",
-    "img": "img/ae9b9e717bbd.jpg"
-   },
-   {
-    "name": "פסנתר",
-    "img": "img/060e8e88876d.jpg"
-   },
-   {
-    "name": "כינור",
-    "img": "img/038810d0fea9.jpg"
-   },
-   {
-    "name": "תופים",
-    "img": "img/b95c82f62228.jpg"
-   },
-   {
-    "name": "חליל",
-    "img": "img/14df6ecbe5be.jpg"
-   },
-   {
-    "name": "חצוצרה",
-    "img": "img/142e3acd3610.jpg"
-   },
-   {
-    "name": "סקסופון",
-    "img": "img/1f1ec2ae1fc9.jpg"
-   },
-   {
-    "name": "נבל",
-    "img": "img/0015d99e6518.jpg"
-   },
-   {
-    "name": "אקורדיון",
-    "img": "img/4d5aae0b218a.jpg"
-   },
-   {
-    "name": "מפוחית",
-    "img": "img/e875dfd59e29.jpg"
-   },
-   {
-    "name": "צ'לו",
-    "img": "img/1a1f249ab617.jpg"
-   },
-   {
-    "name": "קונטרבס",
-    "img": "img/1f54e4e76188.jpg"
-   },
-   {
-    "name": "קלרינט",
-    "img": "img/677486bf1fb6.jpg"
-   },
-   {
-    "name": "טרומבון",
-    "img": "img/06ee321811c5.jpg"
-   },
-   {
-    "name": "טובה",
-    "img": "img/67c48112a7fe.jpg"
-   },
-   {
-    "name": "יוקלילי",
-    "img": "img/3af3630b7817.jpg"
-   },
-   {
-    "name": "דרבוקה",
-    "img": "img/978e4dd9de1b.jpg"
-   },
-   {
-    "name": "בוזוקי",
-    "img": "img/6e305714b5ea.jpg"
-   },
-   {
-    "name": "שופר",
-    "img": "img/12a270a7ccde.jpg"
-   },
-   {
-    "name": "קסילופון",
-    "img": "img/f18860f5f0fb.jpg"
-   },
-   {
-    "name": "משולש",
-    "img": "img/54ffe1fb50a0.jpg"
-   },
-   {
-    "name": "מצלתיים",
-    "img": "img/8bf03d002dab.jpg"
-   },
-   {
-    "name": "עוגב",
-    "img": "img/626641dac016.jpg"
-   },
-   {
-    "name": "חלילית",
-    "img": "img/3a037d96d5b8.jpg"
-   },
-   {
-    "name": "גיטרה חשמלית",
-    "img": "img/b44421b51d1e.jpg"
-   },
-   {
-    "name": "סינתיסייזר",
-    "img": "img/900ed6d185c7.jpg"
-   },
-   {
-    "name": "חמת חלילים",
-    "img": "img/e51777fa1b08.jpg"
-   },
-   {
-    "name": "טמבורין",
-    "img": "img/a9896b73ba71.jpg"
-   },
-   {
-    "name": "סיטאר",
-    "img": "img/a7f8b3381f38.jpg"
-   },
-   {
-    "name": "עוד",
-    "img": "img/6ff90e097786.jpg"
-   }
-  ]
- },
- {
-  "id": "sports",
-  "name": "ענפי ספורט",
-  "cover": "img/81271228cba0.jpg",
-  "items": [
-   {
-    "name": "כדורגל",
-    "img": "img/81271228cba0.jpg"
-   },
-   {
-    "name": "כדורסל",
-    "img": "img/c71a18083d9e.jpg"
-   },
-   {
-    "name": "טניס",
-    "img": "img/0c493d20a119.jpg"
-   },
-   {
-    "name": "שחייה",
-    "img": "img/9158924426b3.jpg"
-   },
-   {
-    "name": "גלישת גלים",
-    "img": "img/23476022a493.jpg"
-   },
-   {
-    "name": "סקי",
-    "img": "img/49c89c46e533.jpg"
-   },
-   {
-    "name": "איגרוף",
-    "img": "img/19bf99f6abb9.jpg"
-   },
-   {
-    "name": "ג'ודו",
-    "img": "img/73a1b10caa8e.jpg"
-   },
-   {
-    "name": "התעמלות מכשירים",
-    "img": "img/03b87dbf242d.jpg"
-   },
-   {
-    "name": "כדורעף",
-    "img": "img/c26e2589e250.jpg"
-   },
-   {
-    "name": "כדוריד",
-    "img": "img/b49b2084a9c5.jpg"
-   },
-   {
-    "name": "בייסבול",
-    "img": "img/ea94a7ff1f4c.jpg"
-   },
-   {
-    "name": "פוטבול אמריקאי",
-    "img": "img/1e55a651ed48.jpg"
-   },
-   {
-    "name": "גולף",
-    "img": "img/690c3b104256.jpg"
-   },
-   {
-    "name": "הוקי קרח",
-    "img": "img/3d7f6595bc43.jpg"
-   },
-   {
-    "name": "רכיבת אופניים",
-    "img": "img/d6e3142ca705.jpg"
-   },
-   {
-    "name": "פורמולה 1",
-    "img": "img/267f48aa82ee.jpg"
-   },
-   {
-    "name": "החלקה אמנותית",
-    "img": "img/b1a63be79fa5.jpg"
-   },
-   {
-    "name": "טניס שולחן",
-    "img": "img/a60f5b89e150.jpg"
-   },
-   {
-    "name": "באולינג",
-    "img": "img/fe98b2b3f214.jpg"
    },
    {
-    "name": "קשתות",
-    "img": "img/bb064091fdc6.jpg"
+    "name": "דילדו",
+    "img": "img/d3a3abb4af37.jpg",
+    "nsfw": 1
    },
    {
-    "name": "סיוף",
-    "img": "img/ad0b8f049250.jpg"
+    "name": "ויברטור",
+    "img": "img/1dcc06868dd6.jpg",
+    "nsfw": 1
    },
    {
-    "name": "מרתון",
-    "img": "img/0c7320e0548b.jpg"
+    "name": "ויברטור ארנב",
+    "img": "img/30697b969c1f.jpg",
+    "nsfw": 1
    },
    {
-    "name": "קפיצה לגובה",
-    "img": "img/998fc5c35d38.jpg"
+    "name": "קונדום",
+    "img": "img/17b76d5d957c.jpg",
+    "nsfw": 1
    },
    {
-    "name": "קפיצה במוט",
-    "img": "img/91d86a14be26.jpg"
+    "name": "אזיקים",
+    "img": "img/d2477c7895ec.jpg",
+    "nsfw": 1
    },
    {
-    "name": "סקייטבורד",
-    "img": "img/6ed5379ca270.jpg"
+    "name": "הלבשה תחתונה סקסית",
+    "img": "img/6a224f47c34a.jpg",
+    "nsfw": 1
    },
    {
-    "name": "טיפוס ספורטיבי",
-    "img": "img/d89e765b7cfe.jpg"
+    "name": "חוטיני",
+    "img": "img/8df1f1578b6a.jpg",
+    "nsfw": 1
    },
    {
-    "name": "רכיבה על סוסים",
-    "img": "img/575295b2c0db.jpg"
+    "name": "שוט",
+    "img": "img/c8339988c78a.jpg",
+    "nsfw": 1
    },
    {
-    "name": "שחמט",
-    "img": "img/0727c24ec484.jpg"
+    "name": "ג'ל סיכה",
+    "img": "img/a5efdf3f56b2.jpg",
+    "nsfw": 1
    },
    {
-    "name": "חצים (דארטס)",
-    "img": "img/676ff0cc57a8.jpg"
+    "name": "פלאג אנאלי",
+    "img": "img/e0612e8da95b.jpg",
+    "nsfw": 1
    },
    {
-    "name": "כדורמים",
-    "img": "img/8e284cf470af.jpg"
+    "name": "פלשלייט",
+    "img": "img/7e10ffcb4e2f.jpg",
+    "nsfw": 1
    },
    {
-    "name": "סנובורד",
-    "img": "img/3b8d1c7af927.jpg"
+    "name": "בובת מין",
+    "img": "img/5d905751f4b3.jpg",
+    "nsfw": 1
    },
    {
-    "name": "קראטה",
-    "img": "img/777407644c37.jpg"
+    "name": "בדיקת היריון",
+    "img": "img/a661dec535cb.jpg",
+    "nsfw": 1
    },
    {
-    "name": "הרמת משקולות",
-    "img": "img/a66acea490ec.jpg"
+    "name": "מגיק וונד",
+    "img": "img/f3345086cc2b.jpg",
+    "nsfw": 1
    },
    {
-    "name": "היאבקות",
-    "img": "img/d41d8c4d7ec7.jpg"
+    "name": "משאבת פין",
+    "img": "img/a6828f4f153d.jpg",
+    "nsfw": 1
    },
    {
-    "name": "רוגבי",
-    "img": "img/6e0cdf99cec6.jpg"
+    "name": "חגורת צניעות",
+    "img": "img/c1ba9953ef25.jpg",
+    "nsfw": 1
    },
    {
-    "name": "קריקט",
-    "img": "img/a90edc84faeb.jpg"
+    "name": "טמפון",
+    "img": "img/ecbb66d42188.jpg",
+    "nsfw": 1
    }
   ]
  },
@@ -2107,129 +2582,56 @@ const CATEGORIES = [
    {
     "name": "גנן",
     "img": "img/a5e635fa28d2.jpg"
-   }
-  ]
- },
- {
-  "id": "holidays",
-  "name": "חגים ומועדים",
-  "cover": "img/b51b70541fb4.jpg",
-  "items": [
-   {
-    "name": "חנוכה",
-    "img": "img/b51b70541fb4.jpg"
    },
    {
-    "name": "פורים",
-    "img": "img/2d2f953ea88d.jpg"
+    "name": "חשפנית",
+    "img": "img/d18a84abc6ed.jpg",
+    "nsfw": 1
    },
    {
-    "name": "ליל הסדר",
-    "img": "img/d0b4f75cb0dd.jpg"
+    "name": "שחקן פורנו",
+    "img": "img/fa6d9263fecf.jpg",
+    "nsfw": 1
    },
    {
-    "name": "ראש השנה",
-    "img": "img/cdf0dd37d9ec.jpg"
+    "name": "שולטת (דומינטריקס)",
+    "img": "img/36e86cafb4ff.jpg",
+    "nsfw": 1
    },
    {
-    "name": "יום כיפור",
-    "img": "img/6d1036bc2e3a.jpg"
+    "name": "רקדנית עמוד",
+    "img": "img/518bec4d5146.jpg",
+    "nsfw": 1
    },
    {
-    "name": "סוכות",
-    "img": "img/61682b3dc5ff.jpg"
+    "name": "פרוקטולוג",
+    "img": "img/e3e344d5bd8f.jpg",
+    "nsfw": 1
    },
    {
-    "name": "שבועות",
-    "img": "img/8d22c649f25c.jpg"
+    "name": "גינקולוג",
+    "img": "img/ac7d17cd5ba8.jpg",
+    "nsfw": 1
    },
    {
-    "name": "ל\"ג בעומר",
-    "img": "img/be7a5dbc539c.jpg"
+    "name": "אורולוג",
+    "img": "img/c14b71055429.jpg",
+    "nsfw": 1
    },
    {
-    "name": "ט\"ו בשבט",
-    "img": "img/077fe472e83b.jpg"
+    "name": "תורם זרע",
+    "img": "img/d503758f0e02.jpg",
+    "nsfw": 1
    },
    {
-    "name": "יום העצמאות",
-    "img": "img/22dce68774fa.jpg"
+    "name": "מוהל",
+    "img": "img/f6e30d186609.jpg",
+    "nsfw": 1
    },
    {
-    "name": "יום השואה",
-    "img": "img/e9949b6e7d8d.jpg"
-   },
-   {
-    "name": "מימונה",
-    "img": "img/3c0a22b1f232.jpg"
-   },
-   {
-    "name": "בר מצווה",
-    "img": "img/ab5983f7f732.jpg"
-   },
-   {
-    "name": "חתונה",
-    "img": "img/76d9aef27d30.jpg"
-   },
-   {
-    "name": "שבת",
-    "img": "img/2dfdb408044d.jpg"
-   },
-   {
-    "name": "חג המולד",
-    "img": "img/81b616fbff55.jpg"
-   },
-   {
-    "name": "ליל כל הקדושים (האלווין)",
-    "img": "img/e1114432a2ac.jpg"
-   },
-   {
-    "name": "פסחא",
-    "img": "img/e82df739dd8c.jpg"
-   },
-   {
-    "name": "רמדאן",
-    "img": "img/24e38cfd0bee.jpg"
-   },
-   {
-    "name": "דיוואלי",
-    "img": "img/2c90aaf7b123.jpg"
-   },
-   {
-    "name": "השנה הסינית החדשה",
-    "img": "img/0979c8ed43f3.jpg"
-   },
-   {
-    "name": "חג ההודיה",
-    "img": "img/75c8b6f79de8.jpg"
-   },
-   {
-    "name": "ולנטיין",
-    "img": "img/4678d5958bbd.jpg"
-   },
-   {
-    "name": "הקרנבל בריו",
-    "img": "img/df4de347565e.jpg"
-   },
-   {
-    "name": "הולי (פסטיבל הצבעים)",
-    "img": "img/7322279d9aab.jpg"
-   },
-   {
-    "name": "אוקטוברפסט",
-    "img": "img/5ef924c693e1.jpg"
-   },
-   {
-    "name": "ערב השנה החדשה",
-    "img": "img/e376bea053fb.jpg"
-   },
-   {
-    "name": "יום הולדת",
-    "img": "img/aac772216aec.jpg"
-   },
-   {
-    "name": "מצעד הגאווה",
-    "img": "img/c006c73a9ecb.jpg"
+    "name": "מוכר בחנות סקס",
+    "img": "img/e594659ef2ec.jpg",
+    "nsfw": 1
    }
   ]
  },
@@ -2377,236 +2779,26 @@ const CATEGORIES = [
    {
     "name": "התפרצות הר וזוב בפומפיי",
     "img": "img/06b297e41397.jpg"
-   }
-  ]
- },
- {
-  "id": "bible",
-  "name": "תנ\"ך",
-  "cover": "img/a97b3d7aaab2.jpg",
-  "items": [
-   {
-    "name": "אדם וחוה",
-    "img": "img/a97b3d7aaab2.jpg"
    },
    {
-    "name": "תיבת נח",
-    "img": "img/ce76786c2f2a.jpg"
+    "name": "פרשת קלינטון-לוינסקי",
+    "img": "img/42fcfb3bcd00.jpg",
+    "nsfw": 1
    },
    {
-    "name": "מגדל בבל",
-    "img": "img/ea61791d1a19.jpg"
+    "name": "פרשת סטורמי דניאלס וטראמפ",
+    "img": "img/76407b4ed16e.jpg",
+    "nsfw": 1
    },
    {
-    "name": "אברהם אבינו",
-    "img": "img/c9af96c05921.jpg"
+    "name": "תיקי אפשטיין",
+    "img": "img/1c95a9797424.jpg",
+    "nsfw": 1
    },
    {
-    "name": "עקדת יצחק",
-    "img": "img/f7c6fe8574e9.jpg"
-   },
-   {
-    "name": "סולם יעקב",
-    "img": "img/cb7a53394d0f.jpg"
-   },
-   {
-    "name": "יוסף וכתונת הפסים",
-    "img": "img/58ddd4fe38d0.jpg"
-   },
-   {
-    "name": "משה רבנו",
-    "img": "img/a681979bbd6b.jpg"
-   },
-   {
-    "name": "קריעת ים סוף",
-    "img": "img/b0467ff21f34.jpg"
-   },
-   {
-    "name": "עשרת הדיברות",
-    "img": "img/21132fe41aef.jpg"
-   },
-   {
-    "name": "עגל הזהב",
-    "img": "img/79732a9ab4c3.jpg"
-   },
-   {
-    "name": "שמשון הגיבור",
-    "img": "img/411da68f378e.jpg"
-   },
-   {
-    "name": "דוד וגוליית",
-    "img": "img/6e1529bd79ad.jpg"
-   },
-   {
-    "name": "דוד המלך",
-    "img": "img/464e07afc9e4.jpg"
-   },
-   {
-    "name": "שלמה המלך",
-    "img": "img/161a5ffcff82.jpg"
-   },
-   {
-    "name": "יונה והדג",
-    "img": "img/ae8989a8f472.jpg"
-   },
-   {
-    "name": "דניאל בגוב האריות",
-    "img": "img/65e21d08ab36.jpg"
-   },
-   {
-    "name": "אסתר המלכה",
-    "img": "img/2b1d226f59ef.jpg"
-   },
-   {
-    "name": "אליהו הנביא",
-    "img": "img/01c3012a4b4c.jpg"
-   },
-   {
-    "name": "קין והבל",
-    "img": "img/75d7e02b6fa0.jpg"
-   },
-   {
-    "name": "סדום ועמורה",
-    "img": "img/f5f49d85d8ab.jpg"
-   },
-   {
-    "name": "חומות יריחו",
-    "img": "img/2b56212d9429.jpg"
-   },
-   {
-    "name": "רות",
-    "img": "img/13bc80b2ae2d.jpg"
-   },
-   {
-    "name": "שאול המלך",
-    "img": "img/adc9b28bd8df.jpg"
-   },
-   {
-    "name": "דבורה הנביאה",
-    "img": "img/a703d6d14769.jpg"
-   },
-   {
-    "name": "גן עדן",
-    "img": "img/38c3670ca13f.jpg"
-   },
-   {
-    "name": "עשר המכות",
-    "img": "img/a1efffdb9ff4.jpg"
-   },
-   {
-    "name": "המנורה",
-    "img": "img/c4c24640b21a.jpg"
-   },
-   {
-    "name": "בית המקדש",
-    "img": "img/e9fc396242e6.jpg"
-   }
-  ]
- },
- {
-  "id": "art",
-  "name": "יצירות אמנות",
-  "cover": "img/fa0fa4cbecc2.jpg",
-  "items": [
-   {
-    "name": "המונה ליזה",
-    "img": "img/fa0fa4cbecc2.jpg"
-   },
-   {
-    "name": "ליל כוכבים",
-    "img": "img/88279a443242.jpg"
-   },
-   {
-    "name": "הצעקה",
-    "img": "img/6b0a12eeeab7.jpg"
-   },
-   {
-    "name": "הסעודה האחרונה",
-    "img": "img/f40738793440.jpg"
-   },
-   {
-    "name": "נערה עם עגיל פנינה",
-    "img": "img/02266d2d2b32.jpg"
-   },
-   {
-    "name": "הולדת ונוס",
-    "img": "img/2cac74b0f4a8.jpg"
-   },
-   {
-    "name": "בריאת האדם",
-    "img": "img/2254183a6f66.jpg"
-   },
-   {
-    "name": "הנשיקה",
-    "img": "img/8f784880208f.jpg"
-   },
-   {
-    "name": "חמניות",
-    "img": "img/1826373791c7.jpg"
-   },
-   {
-    "name": "הגל הגדול של קנגאווה",
-    "img": "img/7d4a9a412803.jpg"
-   },
-   {
-    "name": "משמר הלילה",
-    "img": "img/138e9d2d4724.jpg"
-   },
-   {
-    "name": "החירות מובילה את העם",
-    "img": "img/1f31f7965899.jpg"
-   },
-   {
-    "name": "נפוליאון חוצה את האלפים",
-    "img": "img/8cdbf66f7e35.jpg"
-   },
-   {
-    "name": "ונוס ממילו",
-    "img": "img/23399a0e3c94.jpg"
-   },
-   {
-    "name": "הפסל דוד",
-    "img": "img/0b0e0c11bd5d.jpg"
-   },
-   {
-    "name": "האדם החושב",
-    "img": "img/c1a3c5fcbada.jpg"
-   },
-   {
-    "name": "גותיקה אמריקאית",
-    "img": "img/e8d4a7ae2c7d.jpg"
-   },
-   {
-    "name": "חבצלות המים",
-    "img": "img/7e551a225e5c.jpg"
-   },
-   {
-    "name": "גן התענוגות הארציים",
-    "img": "img/1687507b0a0f.jpg"
-   },
-   {
-    "name": "הפייטה",
-    "img": "img/855f46f27880.jpg"
-   },
-   {
-    "name": "טרסת בית הקפה בלילה",
-    "img": "img/b832eec79ddf.jpg"
-   },
-   {
-    "name": "לאס מנינאס",
-    "img": "img/ccf0c93a78e5.jpg"
-   },
-   {
-    "name": "ציידים בשלג",
-    "img": "img/7fcc54789bb9.jpg"
-   },
-   {
-    "name": "הנודד מעל ים הערפל",
-    "img": "img/ff4d6f8da3d6.jpg"
-   },
-   {
-    "name": "חדר השינה בארל",
-    "img": "img/00ac7df57688.jpg"
+    "name": "המהפכה המינית",
+    "img": "img/2af19e2da318.jpg",
+    "nsfw": 1
    }
   ]
  }

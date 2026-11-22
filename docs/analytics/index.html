@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="../icon.png">
+<title>GuessIt · סטטיסטיקות</title>
+<style>
+:root {
+  --bg:#15112a; --panel:#241d45; --muted:#b3acd6; --grid:rgba(255,255,255,.14);
+  --bar:#e0457c;                                  /* single-series bars */
+  --ok:#0ca30c; --skip:#3987e5; --time:#e66767;   /* card results (validated set) */
+  --c1:#3987e5; --c2:#d95926; --c3:#199e70;       /* devices */
+  --m1:#d95926; --m2:#9085e9;                     /* two-way splits */
+}
+* { box-sizing:border-box; }
+body { margin:0; padding:16px; background:var(--bg); color:#fff; font-family:system-ui, "Noto Sans Hebrew", Arial, sans-serif; }
+main { max-width:980px; margin:auto; }
+header { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:14px; }
+h1 { margin:0; font-size:24px; flex:1; }
+a.back { color:#fff; text-decoration:none; background:var(--panel); padding:8px 16px; border-radius:999px; font-weight:700; font-size:14px; }
+#status { width:100%; color:var(--muted); font-size:13px; }
+.tiles { display:grid; grid-template-columns:repeat(auto-fill, minmax(120px, 1fr)); gap:10px; }
+.tile { background:var(--panel); border-radius:14px; padding:12px 14px; }
+.tile b { display:block; font-size:28px; font-weight:800; font-variant-numeric:tabular-nums; }
+.tile span { color:var(--muted); font-size:13px; }
+.grid2 { display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap:12px; margin-top:12px; }
+.card { background:var(--panel); border-radius:14px; padding:14px 16px; }
+.card h2 { margin:0 0 12px; font-size:16px; }
+.empty { color:var(--muted); font-size:14px; }
+/* column charts: each slot is a full-height hover target */
+.cols { display:flex; height:150px; gap:2px; direction:ltr; border-bottom:1px solid var(--grid); }
+.cols > span { flex:1; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; }
+.cols small { font-size:11px; color:var(--muted); margin-bottom:2px; font-variant-numeric:tabular-nums; }
+.cols i { width:100%; max-width:34px; background:var(--bar); border-radius:4px 4px 0 0; }
+.xl { display:flex; gap:2px; direction:ltr; margin-top:4px; font-size:11px; color:var(--muted); }
+.xl span { flex:1; text-align:center; white-space:nowrap; }
+/* horizontal bars, growing from the right (RTL baseline) */
+.hb { display:grid; grid-template-columns:max-content 1fr max-content; gap:7px 10px; align-items:center; font-size:14px; }
+.hb .track { height:16px; }
+.hb i { display:block; height:100%; background:var(--bar); border-radius:4px 0 0 4px; }
+.hb b { font-weight:600; color:var(--muted); font-variant-numeric:tabular-nums; }
+/* 100% stacked bars */
+.stack { display:flex; height:24px; gap:2px; margin:4px 0; }
+.stack i:first-child { border-radius:0 4px 4px 0; }
+.stack i:last-child { border-radius:4px 0 0 4px; }
+.stack + .legend { margin-bottom:12px; }
+.sub { font-size:13px; color:var(--muted); }
+.legend { display:flex; flex-wrap:wrap; gap:4px 16px; font-size:13px; }
+.legend span::before { content:""; display:inline-block; width:10px; height:10px; border-radius:2px; margin-inline-end:6px; background:var(--c); }
+details { margin-top:12px; background:var(--panel); border-radius:14px; padding:12px 16px; }
+summary { cursor:pointer; font-weight:700; }
+table { width:100%; border-collapse:collapse; margin-top:8px; font-size:13px; }
+td { padding:4px 6px; border-top:1px solid var(--grid); }
+td:last-child { text-align:left; font-variant-numeric:tabular-nums; }
+#tip { position:fixed; z-index:9; display:none; pointer-events:none; background:#000d; padding:6px 10px; border-radius:8px; font-size:13px; white-space:nowrap; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>📊 GuessIt · סטטיסטיקות</h1>
+    <a class="back" href="../">למשחק ←</a>
+    <div id="status">טוען…</div>
+  </header>
+  <div class="tiles" id="tiles"></div>
+  <div class="grid2">
+    <section class="card"><h2>סבבים ב-14 הימים האחרונים</h2><div id="dRounds"></div></section>
+    <section class="card"><h2>כניסות לאתר ב-14 הימים האחרונים</h2><div id="dVisits"></div></section>
+    <section class="card"><h2>קטגוריות פופולריות <span class="sub">(בכמה סבבים נבחרו)</span></h2><div id="cats"></div></section>
+    <section class="card"><h2>כמה זמן לקח לנחש <span class="sub">(שניות, קלפים שנוחשו)</span></h2><div id="times"></div></section>
+    <section class="card"><h2>פילוחים</h2><div id="splits"></div></section>
+  </div>
+  <details><summary>כל המספרים</summary><table id="raw"></table></details>
+</main>
+<div id="tip"></div>
+
+<script src="../cards.js"></script>
+<script>
+const NS = 'guessit-q7k2m9';  // same namespace as track() in ../index.html
+const $ = id => document.getElementById(id);
+const dayKey = t => new Date(t).toLocaleDateString('sv', { timeZone: 'Asia/Jerusalem' }).replaceAll('-', '');
+const dayLabel = t => new Date(t).toLocaleDateString('he', { timeZone: 'Asia/Jerusalem', day: 'numeric', month: 'numeric' });
+const DAYS = Array.from({ length: 14 }, (_, i) => Date.now() - (13 - i) * 864e5);
+const BUCKETS = [[0, '0–5', 2.5], [5, '5–10', 7.5], [10, '10–20', 15], [20, '20–30', 25], [30, '30–60', 45], [60, '60+', 75]];  // [from, label, midpoint]
+
+const LABELS = {
+  rounds: 'סבבים', visitors: 'מכשירים ייחודיים', visits: 'כניסות', 'res-ok': 'ניחשו', 'res-skip': 'דילגו', 'res-time': 'נגמר הזמן',
+  'rounds-clean': 'סבבים רגילים', 'rounds-nsfw': 'סבבי 18+', 'rounds-timed': 'סבבים עם טיימר', 'rounds-free': 'סבבים ללא הגבלה',
+  'dev-ios': 'אייפון', 'dev-android': 'אנדרואיד', 'dev-desktop': 'מחשב',
+  ...Object.fromEntries(BUCKETS.map(([b, l]) => ['t' + b, `ניחוש תוך ${l} שנ׳`])),
+  ...Object.fromEntries(CATEGORIES.map(c => ['cat-' + c.id, 'קטגוריה: ' + c.name])),
+  ...Object.fromEntries(DAYS.flatMap(d => [['r' + dayKey(d), 'סבבים ' + dayLabel(d)], ['v' + dayKey(d), 'כניסות ' + dayLabel(d)]])),
+};
+const V = {};  // key -> count, filled as responses arrive
+const v = k => V[k] ?? 0;
+const sum = ks => ks.reduce((s, k) => s + v(k), 0);
+const n = x => x.toLocaleString('he');
+const pct = (a, b) => b ? Math.round(100 * a / b) + '%' : '–';
+
+// The counter API allows 30 requests / 10 s per IP, so a few workers fetch and wait out a 429.
+let failed = 0;
+async function load(k) {
+  for (;;) {
+    const r = await fetch(`https://abacus.jasoncameron.dev/get/${NS}/${k}`).catch(() => null);
+    if (r?.status === 429) { await new Promise(f => setTimeout(f, 10000)); continue; }
+    if (r && !r.ok && r.status !== 404) failed++;  // 404 = counter never hit yet
+    V[k] = r?.ok ? (await r.json()).value : 0;
+    if (!r) failed++;
+    return render();
+  }
+}
+const queue = Object.keys(LABELS);
+Promise.all(Array.from({ length: 4 }, async () => { while (queue.length) await load(queue.shift()); }))
+  .then(() => { $('status').textContent = failed ? `${failed} מונים לא נטענו, נסו לרענן` : `עודכן ${new Date().toLocaleTimeString('he')}`; });
+
+function columns(rows) {  // rows: [label, value, tooltip]
+  const max = Math.max(...rows.map(r => r[1]));
+  if (!max) return '<p class="empty">אין עדיין נתונים</p>';
+  return `<div class="cols">${rows.map(([, val, tip]) =>
+    `<span data-tip="${tip}">${val ? `<small>${n(val)}</small>` : ''}<i style="height:${100 * val / max * 0.85}%"></i></span>`).join('')}</div>
+    <div class="xl">${rows.map(([l]) => `<span>${l}</span>`).join('')}</div>`;
+}
+
+function stack(title, parts) {  // parts: [label, value, css color var]
+  const total = parts.reduce((s, p) => s + p[1], 0);
+  if (!total) return `<div class="sub">${title}</div><p class="empty">אין עדיין נתונים</p>`;
+  return `<div class="sub">${title}</div>
+    <div class="stack">${parts.filter(p => p[1]).map(([l, val, c]) =>
+      `<i style="flex:${val};background:var(${c})" data-tip="${l}: ${n(val)} (${pct(val, total)})"></i>`).join('')}</div>
+    <div class="legend">${parts.map(([l, val, c]) => `<span style="--c:var(${c})">${l} ${pct(val, total)}</span>`).join('')}</div>`;
+}
+
+function render() {
+  const cards = sum(['res-ok', 'res-skip', 'res-time']);
+  const guessed = sum(BUCKETS.map(b => 't' + b[0]));
+  const avg = guessed ? BUCKETS.reduce((s, [b, , mid]) => s + mid * v('t' + b), 0) / guessed : 0;
+  $('tiles').innerHTML = [
+    [n(v('rounds')), 'סבבים שוחקו'],
+    [n(v('visitors')), 'מכשירים ייחודיים'],
+    [n(v('visits')), 'כניסות לאתר'],
+    [n(cards), 'קלפים ששוחקו'],
+    [pct(v('res-ok'), cards), 'מהקלפים נוחשו'],
+    [avg ? `≈${Math.round(avg)} שנ׳` : '–', 'זמן ניחוש ממוצע'],
+    [v('rounds') ? (cards / v('rounds')).toFixed(1) : '–', 'קלפים בממוצע לסבב'],
+  ].map(([val, l]) => `<div class="tile"><b>${val}</b><span>${l}</span></div>`).join('');
+
+  for (const [el, p, word] of [['dRounds', 'r', 'סבבים'], ['dVisits', 'v', 'כניסות']])
+    $(el).innerHTML = columns(DAYS.map((d, i) => [i % 2 ? '' : dayLabel(d), v(p + dayKey(d)), `${dayLabel(d)}: ${n(v(p + dayKey(d)))} ${word}`]));
+
+  const cats = CATEGORIES.map(c => [c.name, v('cat-' + c.id)]).sort((a, b) => b[1] - a[1]);
+  const top = cats[0][1];
+  $('cats').innerHTML = top ? `<div class="hb">${cats.map(([name, val]) =>
+    `<span>${name}</span><span class="track" data-tip="${name}: ${n(val)} סבבים"><i style="width:${100 * val / top}%"></i></span><b>${n(val)}</b>`).join('')}</div>`
+    : '<p class="empty">אין עדיין נתונים</p>';
+
+  $('times').innerHTML = columns(BUCKETS.map(([b, l]) => [l, v('t' + b), `${l} שניות: ${n(v('t' + b))} קלפים`]));
+
+  $('splits').innerHTML =
+    stack('תוצאות הקלפים', [['✓ ניחשו', v('res-ok'), '--ok'], ['✗ דילגו', v('res-skip'), '--skip'], ['⏰ נגמר הזמן', v('res-time'), '--time']]) +
+    stack('מכשירים', [['אייפון', v('dev-ios'), '--c1'], ['אנדרואיד', v('dev-android'), '--c2'], ['מחשב', v('dev-desktop'), '--c3']]) +
+    stack('מצב משחק', [['רגיל', v('rounds-clean'), '--m1'], ['🔞 18+', v('rounds-nsfw'), '--m2']]) +
+    stack('טיימר', [['עם טיימר', v('rounds-timed'), '--m1'], ['ללא הגבלה', v('rounds-free'), '--m2']]);
+
+  $('raw').innerHTML = Object.entries(LABELS).filter(([k]) => k in V).map(([k, l]) => `<tr><td>${l}</td><td>${n(V[k])}</td></tr>`).join('');
+}
+render();
+
+const tip = $('tip');
+for (const ev of ['pointermove', 'pointerdown']) addEventListener(ev, e => {
+  const t = e.target.closest?.('[data-tip]');
+  tip.style.display = t ? 'block' : 'none';
+  if (!t) return;
+  tip.textContent = t.dataset.tip;
+  tip.style.left = Math.max(8, Math.min(e.clientX - tip.offsetWidth / 2, innerWidth - tip.offsetWidth - 8)) + 'px';
+  tip.style.top = Math.max(8, e.clientY - 44) + 'px';
+});
+</script>
+</body>
+</html>

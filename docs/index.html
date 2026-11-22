@@ -37,11 +37,16 @@ header { display:flex; align-items:center; gap:10px; padding:10px 20px; flex-wra
 #start:disabled { filter:grayscale(1); opacity:.45; box-shadow:none; }
 
 /* settings */
-dialog { margin:auto; border:0; border-radius:20px; padding:18px 22px; width:min(440px, 92vw); max-height:94vh; background:var(--panel); color:#fff; }
+dialog { margin:auto; border:0; border-radius:20px; padding:0; width:min(440px, 92vw); max-height:94vh; background:var(--panel); color:#fff; }
 dialog::backdrop { background:rgba(0,0,0,.65); }
+dialog .in { padding:18px 22px; }
 dialog h3 { font-size:20px; margin-bottom:6px; }
 dialog label { display:flex; justify-content:space-between; align-items:baseline; margin-top:10px; font-size:15px; color:var(--muted); }
 dialog label b { font-size:20px; color:#fff; }
+.check { gap:12px; margin-top:18px !important; padding-top:14px; border-top:1px solid rgba(255,255,255,.12); }
+.check span { color:#fff; font-weight:700; }
+.check small { display:block; font-weight:400; color:var(--muted); font-size:13px; }
+.check input { width:26px; height:26px; flex:none; accent-color:var(--a1); }
 .slider { display:flex; align-items:center; gap:10px; direction:ltr; margin-top:4px; }
 .slider input { flex:1; height:32px; accent-color:var(--a1); }
 .slider button { width:42px; height:42px; flex:none; border-radius:50%; background:rgba(255,255,255,.14); font-size:24px; font-weight:700; }
@@ -79,6 +84,7 @@ dialog .btn { display:block; margin:16px auto 0; background:linear-gradient(90de
 #rbox { display:flex; align-items:center; gap:16px; background:rgba(0,0,0,.3); padding:10px 20px 10px 10px; border-radius:16px; }
 #rimg { height:28vh; max-width:35vw; border-radius:10px; object-fit:cover; }
 #rname { font-size:clamp(20px, 7vh, 36px); font-weight:800; }
+#took { font-size:clamp(18px, 5vh, 26px); font-weight:800; }
 #stats { color:rgba(255,255,255,.85); font-size:16px; }
 .row { display:flex; gap:12px; }
 .btn { padding:12px 30px; border-radius:999px; font-size:18px; font-weight:800; background:#fff; color:#111; }
@@ -89,7 +95,7 @@ dialog .btn { display:block; margin:16px auto 0; background:linear-gradient(90de
 
 <section id="home" class="screen on">
   <header>
-    <div class="logo">GuessIt?</div>
+    <div class="logo" id="logo">GuessIt?</div>
     <div class="grow"></div>
     <button class="pill" id="setBtn" onclick="$('settings').showModal()"></button>
     <button class="pill" id="all"></button>
@@ -98,14 +104,15 @@ dialog .btn { display:block; margin:16px auto 0; background:linear-gradient(90de
   <button id="start"></button>
 </section>
 
-<dialog id="settings">
-  <h3>⏱ הגדרות טיימר</h3>
+<dialog id="settings"><div class="in">
+  <h3>⚙️ הגדרות</h3>
   <label>זמן לכל קלף <b id="timeVal"></b></label>
   <div class="slider"><button data-for="time" data-step="-5">−</button><input type="range" id="time" min="0" max="300" step="5"><button data-for="time" data-step="5">+</button></div>
   <label>ספירה לאחור לפני הקלף <b id="prepVal"></b></label>
   <div class="slider"><button data-for="prep" data-step="-1">−</button><input type="range" id="prep" min="1" max="15" step="1"><button data-for="prep" data-step="1">+</button></div>
+  <label class="check"><span>🔞 מצב 18+<small>מוסיף קלפים גסים ומביכים לקטגוריות</small></span><input type="checkbox" id="nsfw"></label>
   <button class="btn" autofocus onclick="$('settings').close()">שמור</button>
-</dialog>
+</div></dialog>
 
 <section id="count" class="screen">
   <button class="x" onclick="goBack()">✕</button>
@@ -127,6 +134,7 @@ dialog .btn { display:block; margin:16px auto 0; background:linear-gradient(90de
 <section id="result" class="screen">
   <div id="verdict"></div>
   <div id="rbox"><img id="rimg" alt=""><div id="rname"></div></div>
+  <div id="took"></div>
   <div id="stats"></div>
   <div class="row">
     <button class="btn" onclick="next()">קלף הבא ←</button>
@@ -141,7 +149,7 @@ const VERDICTS = { ok: 'ניחשתם! 🎉', skip: 'דילגתם', time: 'נגמ
 
 const $ = id => document.getElementById(id);
 const fmt = s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
-let cfg = { sel: [], time: 0, prep: 5 };  // time: seconds per card (0 = unlimited), prep: countdown before the card
+let cfg = { sel: [], time: 0, prep: 5, nsfw: false };  // time: seconds per card (0 = unlimited), prep: countdown before the card
 try { Object.assign(cfg, JSON.parse(localStorage.guessit || '{}')); } catch {}
 const saveCfg = () => { try { localStorage.guessit = JSON.stringify(cfg); } catch {} };
 
@@ -160,15 +168,33 @@ function beep(freq, ms = 120, type = 'sine', vol = 0.25, delay = 0) {
 }
 const buzz = pattern => { try { navigator.vibrate(pattern); } catch {} };
 
+// ---------- anonymous usage counters, shown at analytics/ (no personal data) ----------
+const NS = 'guessit-q7k2m9';
+const today = () => new Date().toLocaleDateString('sv', { timeZone: 'Asia/Jerusalem' }).replaceAll('-', '');  // YYYYMMDD
+function track(...keys) {
+  if (!location.hostname.endsWith('github.io')) return;  // local testing doesn't count
+  for (const k of keys) fetch(`https://abacus.jasoncameron.dev/hit/${NS}/${k}`).catch(() => {});
+}
+track('visits', 'v' + today());
+try {
+  if (!localStorage.guessitSeen) {
+    localStorage.guessitSeen = 1;
+    const ua = navigator.userAgent;
+    const dev = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1) ? 'ios' : /Android/.test(ua) ? 'android' : 'desktop';
+    track('visitors', 'dev-' + dev);
+  }
+} catch {}
+
 // ---------- home ----------
 const selected = () => CATEGORIES.filter(c => cfg.sel.includes(c.id));
+const pool = c => c.items.filter(i => cfg.nsfw || !i.nsfw);
 
 for (const c of CATEGORIES) {
   const b = document.createElement('button');
   b.className = 'cat';
   b.dataset.id = c.id;
   b.style.backgroundImage = `url("${c.cover}")`;
-  b.innerHTML = `<span>${c.name}<small>${c.items.length} קלפים</small></span>`;
+  b.innerHTML = `<span>${c.name}<small></small></span>`;
   b.onclick = () => {
     cfg.sel = cfg.sel.includes(c.id) ? cfg.sel.filter(id => id !== c.id) : [...cfg.sel, c.id];
     refresh();
@@ -184,6 +210,9 @@ document.querySelectorAll('.slider button').forEach(b => b.onclick = () => {
   r.value = +r.value + +b.dataset.step;  // the browser clamps to min/max
   r.oninput();
 });
+$('nsfw').checked = cfg.nsfw;
+$('nsfw').onchange = () => { cfg.nsfw = $('nsfw').checked; deck = []; refresh(); };
+$('settings').onclick = e => { if (e.target === e.currentTarget) e.currentTarget.close(); };  // click outside = save & close
 $('all').onclick = () => {
   cfg.sel = selected().length === CATEGORIES.length ? [] : CATEGORIES.map(c => c.id);
   refresh();
@@ -191,7 +220,9 @@ $('all').onclick = () => {
 $('start').onclick = () => {
   try { document.documentElement.requestFullscreen().catch(() => {}); } catch {}  // hides the URL bar on Android; iPhone: use Add to Home Screen
   keepAwake();
-  stats = { ok: 0, skip: 0 }; deck = []; next();
+  stats = { ok: 0, skip: 0 }; deck = [];
+  track('rounds', 'r' + today(), cfg.nsfw ? 'rounds-nsfw' : 'rounds-clean', cfg.time ? 'rounds-timed' : 'rounds-free', ...cfg.sel.map(id => 'cat-' + id));
+  next();
 };
 
 // keep the screen on while the phone sits on someone's forehead
@@ -200,11 +231,15 @@ async function keepAwake() { try { wakeLock = await navigator.wakeLock.request('
 document.addEventListener('visibilitychange', () => { if (wakeLock && document.visibilityState === 'visible') keepAwake(); });
 
 function refresh() {
-  const sel = selected(), n = sel.reduce((s, c) => s + c.items.length, 0);
-  document.querySelectorAll('.cat').forEach(b => b.classList.toggle('on', cfg.sel.includes(b.dataset.id)));
+  const sel = selected(), n = sel.reduce((s, c) => s + pool(c).length, 0);
+  document.querySelectorAll('.cat').forEach((b, i) => {
+    b.classList.toggle('on', cfg.sel.includes(b.dataset.id));
+    b.querySelector('small').textContent = `${pool(CATEGORIES[i]).length} קלפים`;
+  });
+  document.title = $('logo').textContent = cfg.nsfw ? 'אבטל הבולבול' : 'GuessIt?';
   $('timeVal').textContent = cfg.time ? fmt(cfg.time) : 'ללא הגבלה';
   $('prepVal').textContent = `${cfg.prep} שנ׳`;
-  $('setBtn').textContent = `⏱ ${cfg.time ? fmt(cfg.time) : 'ללא הגבלה'}`;
+  $('setBtn').textContent = `⏱ ${cfg.time ? fmt(cfg.time) : 'ללא הגבלה'}${cfg.nsfw ? ' · 🔞' : ''}`;
   $('all').textContent = sel.length === CATEGORIES.length ? 'נקה הכל' : 'בחר הכל';
   $('start').disabled = !n;
   $('start').textContent = n ? `יאללה, מתחילים! (${n} קלפים)` : 'בחרו קטגוריה';
@@ -223,7 +258,7 @@ function shuffle(a) {
 }
 
 function draw() {
-  if (!deck.length) deck = shuffle(selected().flatMap(c => c.items.map(i => ({ ...i, cat: c.name }))));
+  if (!deck.length) deck = shuffle(selected().flatMap(c => pool(c).map(i => ({ ...i, cat: c.name }))));
   return deck.pop();
 }
 
@@ -267,6 +302,9 @@ function reveal() {
 
 function finish(kind) {
   stopTimers();
+  const secs = (Date.now() - shownAt) / 1000;
+  $('took').textContent = `⏱ ${secs < 60 ? secs.toFixed(1) + ' שניות' : fmt(Math.round(secs)) + ' דקות'}`;
+  track('res-' + kind, ...(kind === 'ok' ? ['t' + [60, 30, 20, 10, 5, 0].find(b => secs >= b)] : []));
   if (kind === 'ok') stats.ok++; else stats.skip++;
   if (kind === 'ok') { beep(660, 140); beep(990, 260, 'sine', 0.25, 0.13); buzz(80); }
   else if (kind === 'skip') { beep(330, 220, 'triangle'); buzz(60); }

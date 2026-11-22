@@ -209,21 +209,26 @@ function beep(freq, ms = 120, type = 'sine', vol = 0.25, delay = 0) {
 const buzz = pattern => { try { navigator.vibrate(pattern); } catch {} };
 
 // ---------- anonymous usage counters, shown at analytics/ (no personal data) ----------
-const NS = 'guessit-q7k2m9';
+// Firestore docs stats/total and stats/dYYYYMMDD (per day), bumped through the REST API so no SDK is needed.
+// Allowed field names are listed in ../firestore.rules.
 const today = () => new Date().toLocaleDateString('sv', { timeZone: 'Asia/Jerusalem' }).replaceAll('-', '');  // YYYYMMDD
-function track(...keys) {
+function track(total, daily = []) {
   if (!location.hostname.endsWith('github.io')) return;  // local testing doesn't count
-  for (const k of keys) fetch(`https://abacus.jasoncameron.dev/hit/${NS}/${k}`).catch(() => {});
+  const db = 'projects/avtalbulbul/databases/(default)/documents';
+  const bump = (id, fields) => ({ update: { name: `${db}/stats/${id}`, fields: {} }, updateMask: { fieldPaths: [] },
+    updateTransforms: fields.map(f => ({ fieldPath: f, increment: { integerValue: '1' } })) });
+  const writes = [bump('total', total), ...(daily.length ? [bump('d' + today(), daily)] : [])];
+  fetch(`https://firestore.googleapis.com/v1/${db}:commit?key=AIzaSyBRCm87xSROL8HU9uKbhRwQx2zcO0JlVs0`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ writes }), keepalive: true,
+  }).catch(() => {});
 }
-track('visits', 'v' + today());
-try {
-  if (!localStorage.guessitSeen) {
-    localStorage.guessitSeen = 1;
-    const ua = navigator.userAgent;
-    const dev = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1) ? 'ios' : /Android/.test(ua) ? 'android' : 'desktop';
-    track('visitors', 'dev-' + dev);
-  }
-} catch {}
+{
+  let first = false;
+  try { first = !localStorage.guessitSeen; localStorage.guessitSeen = 1; } catch {}
+  const ua = navigator.userAgent;
+  const dev = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1) ? 'ios' : /Android/.test(ua) ? 'android' : 'desktop';
+  track(['visits', ...(first ? ['visitors', 'dev_' + dev] : [])], ['visits']);
+}
 
 // ---------- home ----------
 const selected = () => CATEGORIES.filter(c => cfg.sel.includes(c.id));
@@ -266,7 +271,7 @@ $('start').onclick = () => {
   keepAwake();
   stats = { ok: 0, skip: 0 }; deck = [];
   window.room?.round();
-  track('rounds', 'r' + today(), cfg.nsfw ? 'rounds-nsfw' : 'rounds-clean', cfg.time ? 'rounds-timed' : 'rounds-free', ...cfg.sel.map(id => 'cat-' + id));
+  track(['rounds', cfg.nsfw ? 'rounds_nsfw' : 'rounds_clean', cfg.time ? 'rounds_timed' : 'rounds_free', ...cfg.sel.map(id => 'cats.' + id)], ['rounds']);
   next();
 };
 
@@ -349,7 +354,7 @@ function finish(kind) {
   stopTimers();
   const secs = (Date.now() - shownAt) / 1000;
   $('took').textContent = `⏱ ${secs < 60 ? secs.toFixed(1) + ' שניות' : fmt(Math.round(secs)) + ' דקות'}`;
-  track('res-' + kind, ...(kind === 'ok' ? ['t' + [60, 30, 20, 10, 5, 0].find(b => secs >= b)] : []));
+  track(['res_' + kind, ...(kind === 'ok' ? ['t' + [60, 30, 20, 10, 5, 0].find(b => secs >= b)] : [])]);
   if (kind === 'ok') stats.ok++; else stats.skip++;
   window.room?.result(kind, secs, stats.ok);
   if (kind === 'ok') { beep(660, 140); beep(990, 260, 'sine', 0.25, 0.13); buzz(80); }

@@ -19,6 +19,16 @@ service cloud.firestore {
       }
     }
 
+    // Anonymous usage counters (stats/total and one doc per day), read by the analytics page.
+    match /stats/{id} {
+      allow read: if true;
+      allow create, update: if (id == 'total' || id.matches('d[0-9]{8}'))
+        && request.resource.data.keys().hasOnly(['visits', 'visitors', 'rounds', 'rounds_nsfw', 'rounds_clean',
+             'rounds_timed', 'rounds_free', 'res_ok', 'res_skip', 'res_time', 'dev_ios', 'dev_android', 'dev_desktop',
+             't0', 't5', 't10', 't20', 't30', 't60', 'cats'])
+        && (!('cats' in request.resource.data) || (request.resource.data.cats is map && request.resource.data.cats.size() <= 40));
+    }
+
     function roomExists(code) { return exists(/databases/$(database)/documents/rooms/$(code)); }
     function validName(n) { return n is string && n.size() > 0 && n.size() <= 20; }
     function validPlayer(d) {

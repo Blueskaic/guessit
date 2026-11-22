@@ -18,7 +18,7 @@ Firebase console > Firestore Database > Rules after changing them.
 
 ## Analytics
 https://blueskaic.github.io/guessit/analytics/ shows plays, visits, popular categories, guess times and devices.
-Counts are anonymous counters on the free Abacus API (abacus.jasoncameron.dev, namespace `guessit-q7k2m9`); only hits from the github.io site count.
+Counts are anonymous counters in Firestore (`stats/total`, plus `stats/dYYYYMMDD` per day); only the github.io site counts.
 
 ## Files
 - `content.json`: categories and items, `["Hebrew name", "English Wikipedia title"]` (prefix `he:` for a Hebrew Wikipedia title, optional 3rd value = direct image URL to force a picture). A category's `nsfw` list holds the 18+ cards.

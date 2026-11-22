@@ -82,7 +82,6 @@ td:not(:first-child), th:not(:first-child) { text-align:left; font-variant-numer
 
 <script src="../cards.js"></script>
 <script>
-const NS = 'guessit-q7k2m9';  // same namespace as track() in ../index.html
 const $ = id => document.getElementById(id);
 const dayKey = t => new Date(t).toLocaleDateString('sv', { timeZone: 'Asia/Jerusalem' }).replaceAll('-', '');
 const dayLabel = t => new Date(t).toLocaleDateString('he', { timeZone: 'Asia/Jerusalem', day: 'numeric', month: 'numeric' });
@@ -103,21 +102,33 @@ const sum = ks => ks.reduce((s, k) => s + v(k), 0);
 const n = x => x.toLocaleString('he');
 const pct = (a, b) => b ? Math.round(100 * a / b) + '%' : '–';
 
-// The counter API allows 30 requests / 10 s per IP, so a few workers fetch and wait out a 429.
-let failed = 0;
-async function load(k) {
-  for (;;) {
-    const r = await fetch(`https://abacus.jasoncameron.dev/get/${NS}/${k}`).catch(() => null);
-    if (r?.status === 429) { await new Promise(f => setTimeout(f, 10000)); continue; }
-    if (r && !r.ok && r.status !== 404) failed++;  // 404 = counter never hit yet
-    V[k] = r?.ok ? (await r.json()).value : 0;
-    if (!r) failed++;
-    return render();
+// One request: Firestore docs stats/total and stats/dYYYYMMDD, written by track() in ../index.html.
+// Their field names (res_ok, cats.celebs, ...) are mapped to this page's keys (res-ok, cat-celebs, ...).
+(async () => {
+  const db = 'projects/avtalbulbul/databases/(default)/documents';
+  try {
+    const r = await fetch(`https://firestore.googleapis.com/v1/${db}:batchGet?key=AIzaSyBRCm87xSROL8HU9uKbhRwQx2zcO0JlVs0`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ documents: ['total', ...DAYS.map(d => 'd' + dayKey(d))].map(id => `${db}/stats/${id}`) }),
+    });
+    if (!r.ok) throw new Error(r.status);
+    const num = o => +(o?.integerValue ?? o?.doubleValue ?? 0);
+    for (const { found } of await r.json()) {
+      if (!found) continue;  // a day nobody played
+      const id = found.name.split('/').pop(), f = found.fields || {};
+      if (id !== 'total') { V['r' + id.slice(1)] = num(f.rounds); V['v' + id.slice(1)] = num(f.visits); continue; }
+      for (const [k, o] of Object.entries(f)) {
+        if (k === 'cats') for (const [c, x] of Object.entries(o.mapValue?.fields || {})) V['cat-' + c] = num(x);
+        else V[k.replace('_', '-')] = num(o);
+      }
+    }
+    for (const k in LABELS) V[k] ??= 0;
+    $('status').textContent = `עודכן ${new Date().toLocaleTimeString('he')}`;
+  } catch (e) {
+    $('status').textContent = 'הנתונים לא נטענו, נסו לרענן';
   }
-}
-const queue = Object.keys(LABELS);
-Promise.all(Array.from({ length: 4 }, async () => { while (queue.length) await load(queue.shift()); }))
-  .then(() => { $('status').textContent = failed ? `${failed} מונים לא נטענו, נסו לרענן` : `עודכן ${new Date().toLocaleTimeString('he')}`; });
+  render();
+})();
 
 function columns(rows) {  // rows: [label, value, tooltip]
   const max = Math.max(...rows.map(r => r[1]));

@@ -6,9 +6,18 @@ service cloud.firestore {
     match /rooms/{code} {
       allow get: if true;
       allow create: if code.matches('[A-Z2-9]{5}')
-        && request.resource.data.keys().hasOnly(['owner', 'created'])
+        && request.resource.data.keys().hasOnly(['owner', 'created', 'pub', 'admin', 'settings'])
         && validName(request.resource.data.owner)
-        && request.resource.data.created == request.time;
+        && request.resource.data.created == request.time
+        && validPub(request.resource.data.pub)
+        && validId(request.resource.data.admin)
+        && validSettings(request.resource.data.settings);
+      // Settings can change any time (the game offers it only on the admin's phone).
+      // pub and admin can be added once, to rooms made before they existed.
+      allow update: if changed().hasOnly(['pub', 'admin', 'settings'])
+        && (!changed().hasAny(['pub']) || (!('pub' in resource.data) && validPub(request.resource.data.pub)))
+        && (!changed().hasAny(['admin']) || (!('admin' in resource.data) && validId(request.resource.data.admin)))
+        && (!changed().hasAny(['settings']) || validSettings(request.resource.data.settings));
 
       match /players/{pid} {
         allow read: if roomExists(code);
@@ -29,6 +38,35 @@ service cloud.firestore {
         && (!('cats' in request.resource.data) || (request.resource.data.cats is map && request.resource.data.cats.size() <= 40));
     }
 
+    // Public summary per room for the analytics page (no room code in it).
+    match /roomlist/{pub} {
+      allow read: if true;
+      allow create, update: if validPub(pub)
+        && request.resource.data.keys().hasOnly(['owner', 'players', 'ok', 'rounds', 'active'])
+        && validName(request.resource.data.owner)
+        && request.resource.data.players is int && request.resource.data.ok is int && request.resource.data.rounds is int
+        && request.resource.data.active == request.time;
+    }
+
+    // Who's online: one doc per device, timestamped every minute while the game is open.
+    match /live/{id} {
+      allow read: if true;
+      allow create, update: if id.size() <= 40
+        && request.resource.data.keys().hasOnly(['seen', 'playing'])
+        && request.resource.data.seen == request.time
+        && request.resource.data.playing is bool;
+    }
+
+    function changed() { return request.resource.data.diff(resource.data).affectedKeys(); }
+    function validId(i) { return i is string && i.size() > 0 && i.size() <= 40; }
+    function validSettings(s) {
+      return s is map && s.keys().hasOnly(['sel', 'time', 'prep', 'nsfw'])
+        && s.sel is list && s.sel.size() <= 40
+        && s.time is int && s.time >= 0 && s.time <= 300
+        && s.prep is int && s.prep >= 1 && s.prep <= 15
+        && s.nsfw is bool;
+    }
+    function validPub(p) { return p is string && p.matches('[A-Z2-9]{12}'); }
     function roomExists(code) { return exists(/databases/$(database)/documents/rooms/$(code)); }
     function validName(n) { return n is string && n.size() > 0 && n.size() <= 20; }
     function validPlayer(d) {

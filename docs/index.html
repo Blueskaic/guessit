@@ -125,6 +125,7 @@ dialog .btn { display:block; margin:16px auto 0; background:linear-gradient(90de
 
 <dialog id="settings"><div class="in">
   <h3>⚙️ הגדרות</h3>
+  <p class="hint" id="lockMsg" hidden></p>
   <label>זמן לכל קלף <b id="timeVal"></b></label>
   <div class="slider"><button data-for="time" data-step="-5">−</button><input type="range" id="time" min="0" max="300" step="5"><button data-for="time" data-step="5">+</button></div>
   <label>ספירה לאחור לפני הקלף <b id="prepVal"></b></label>
@@ -148,6 +149,7 @@ dialog .btn { display:block; margin:16px auto 0; background:linear-gradient(90de
   <div id="roomIn" hidden>
     <h3>👥 <span id="rTitle"></span></h3>
     <div class="code">קוד החדר: <b id="rShow" dir="ltr"></b><button class="pill" id="rShare">שיתוף 🔗</button></div>
+    <p class="hint" id="rAdmin"></p>
     <table id="board"></table>
     <div class="row"><button class="btn" onclick="$('roomDlg').close()">סגירה</button><button class="btn ghost" id="rLeave">יציאה מהחדר</button></div>
   </div>
@@ -191,7 +193,20 @@ const $ = id => document.getElementById(id);
 const fmt = s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
 let cfg = { sel: [], time: 0, prep: 5, nsfw: false };  // time: seconds per card (0 = unlimited), prep: countdown before the card
 try { Object.assign(cfg, JSON.parse(localStorage.guessit || '{}')); } catch {}
-const saveCfg = () => { try { localStorage.guessit = JSON.stringify(cfg); } catch {} };
+// In a room, the room admin's settings replace this phone's own (kept aside in `own`) until leaving the room.
+let own = null, lockedBy = null;
+const saveCfg = () => { try { localStorage.guessit = JSON.stringify(own || cfg); } catch {} };
+function roomLock(settings, admin) {
+  const before = JSON.stringify(cfg);
+  if (settings) { own ||= { ...cfg, sel: [...cfg.sel] }; Object.assign(cfg, settings); }
+  else if (own) { Object.assign(cfg, own); own = null; }
+  lockedBy = settings ? admin : null;
+  if (JSON.stringify(cfg) !== before) deck = [];
+  for (const k of ['time', 'prep']) $(k).value = cfg[k];
+  $('nsfw').checked = cfg.nsfw;
+  refresh();
+}
+window.game = { get cfg() { return own || cfg; }, lock: roomLock };  // used by room.js
 
 // ---------- sound / vibration ----------
 let ac;
@@ -212,16 +227,29 @@ const buzz = pattern => { try { navigator.vibrate(pattern); } catch {} };
 // Firestore docs stats/total and stats/dYYYYMMDD (per day), bumped through the REST API so no SDK is needed.
 // Allowed field names are listed in ../firestore.rules.
 const today = () => new Date().toLocaleDateString('sv', { timeZone: 'Asia/Jerusalem' }).replaceAll('-', '');  // YYYYMMDD
-function track(total, daily = []) {
+const DB = 'projects/avtalbulbul/databases/(default)/documents';
+function commit(writes) {
   if (!location.hostname.endsWith('github.io')) return;  // local testing doesn't count
-  const db = 'projects/avtalbulbul/databases/(default)/documents';
-  const bump = (id, fields) => ({ update: { name: `${db}/stats/${id}`, fields: {} }, updateMask: { fieldPaths: [] },
-    updateTransforms: fields.map(f => ({ fieldPath: f, increment: { integerValue: '1' } })) });
-  const writes = [bump('total', total), ...(daily.length ? [bump('d' + today(), daily)] : [])];
-  fetch(`https://firestore.googleapis.com/v1/${db}:commit?key=AIzaSyBRCm87xSROL8HU9uKbhRwQx2zcO0JlVs0`, {
+  fetch(`https://firestore.googleapis.com/v1/${DB}:commit?key=AIzaSyBRCm87xSROL8HU9uKbhRwQx2zcO0JlVs0`, {
     method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ writes }), keepalive: true,
   }).catch(() => {});
 }
+function track(total, daily = []) {
+  const bump = (id, fields) => ({ update: { name: `${DB}/stats/${id}`, fields: {} }, updateMask: { fieldPaths: [] },
+    updateTransforms: fields.map(f => ({ fieldPath: f, increment: { integerValue: '1' } })) });
+  commit([bump('total', total), ...(daily.length ? [bump('d' + today(), daily)] : [])]);
+}
+// Who's online now: live/{device} gets a timestamp every minute while the page is visible, and on round start/end.
+let deviceId = crypto.randomUUID?.() || String(Math.random()).slice(2);
+try { deviceId = localStorage.guessitId ||= deviceId; } catch {}
+function heartbeat() {
+  if (document.visibilityState !== 'visible') return;
+  commit([{ update: { name: `${DB}/live/${deviceId}`, fields: { playing: { booleanValue: !$('home').classList.contains('on') } } },
+    updateTransforms: [{ fieldPath: 'seen', setToServerValue: 'REQUEST_TIME' }] }]);
+}
+setInterval(heartbeat, 60000);
+document.addEventListener('visibilitychange', heartbeat);
+heartbeat();
 {
   let first = false;
   try { first = !localStorage.guessitCounted; localStorage.guessitCounted = 1; } catch {}
@@ -241,6 +269,7 @@ for (const c of CATEGORIES) {
   b.style.backgroundImage = `url("${c.cover}")`;
   b.innerHTML = `<span>${c.name}<small></small></span>`;
   b.onclick = () => {
+    if (lockedBy) return;
     cfg.sel = cfg.sel.includes(c.id) ? cfg.sel.filter(id => id !== c.id) : [...cfg.sel, c.id];
     refresh();
   };
@@ -259,6 +288,7 @@ $('nsfw').checked = cfg.nsfw;
 $('nsfw').onchange = () => { cfg.nsfw = $('nsfw').checked; deck = []; refresh(); };
 $('settings').onclick = e => { if (e.target === e.currentTarget) e.currentTarget.close(); };  // click outside = save & close
 $('all').onclick = () => {
+  if (lockedBy) return $('roomDlg').showModal();
   cfg.sel = selected().length === CATEGORIES.length ? [] : CATEGORIES.map(c => c.id);
   refresh();
 };
@@ -273,6 +303,7 @@ $('start').onclick = () => {
   window.room?.round();
   track(['rounds', cfg.nsfw ? 'rounds_nsfw' : 'rounds_clean', cfg.time ? 'rounds_timed' : 'rounds_free', ...cfg.sel.map(id => 'cats.' + id)], ['rounds']);
   next();
+  heartbeat();
 };
 
 // keep the screen on while the phone sits on someone's forehead
@@ -290,7 +321,11 @@ function refresh() {
   $('timeVal').textContent = cfg.time ? fmt(cfg.time) : 'ללא הגבלה';
   $('prepVal').textContent = `${cfg.prep} שנ׳`;
   $('setBtn').textContent = `⏱ ${cfg.time ? fmt(cfg.time) : 'ללא הגבלה'}${cfg.nsfw ? ' · 🔞' : ''}`;
-  $('all').textContent = sel.length === CATEGORIES.length ? 'נקה הכל' : 'בחר הכל';
+  $('all').textContent = lockedBy ? `👑 ${lockedBy} בוחר/ת` : sel.length === CATEGORIES.length ? 'נקה הכל' : 'בחר הכל';
+  for (const el of document.querySelectorAll('#settings input, .slider button')) el.disabled = !!lockedBy;
+  $('lockMsg').hidden = !lockedBy;
+  $('lockMsg').textContent = `👑 ${lockedBy} מנהל/ת את החדר וקובע/ת את ההגדרות והקטגוריות.`;
+  window.room?.settings({ sel: cfg.sel, time: cfg.time, prep: cfg.prep, nsfw: cfg.nsfw });
   $('start').disabled = !n;
   $('start').textContent = n ? `יאללה, מתחילים! (${n} קלפים)` : 'בחרו קטגוריה';
   saveCfg();
@@ -315,6 +350,7 @@ function draw() {
 function next() {
   stopTimers();
   cur = draw();
+  if (!cur) return goBack();  // the room admin cleared all categories
   $('pic').src = $('rimg').src = cur.img;   // loads while the countdown runs
   $('bg').style.backgroundImage = `url("${cur.img}")`;
   $('name').textContent = $('rname').textContent = cur.name;
@@ -373,6 +409,7 @@ $('zSkip').onclick = tap('skip');
 function goBack() {
   stopTimers();
   show('home');
+  heartbeat();
 }
 </script>
 </body>

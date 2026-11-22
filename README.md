@@ -13,6 +13,8 @@ The ⚙️ settings set the time per card, the countdown and 18+ mode (extra adu
 ## Rooms (friends leaderboard)
 👥 on the home screen: one player opens a room and shares the 5-letter code or invite link, friends join with a name on their own phones.
 Every round and card result goes to the room's leaderboard (cards guessed, best round, average guess time, rounds).
+The player who opened the room is its admin 👑: their categories and settings apply to everyone in the room.
+The analytics page shows who's online/playing now and a list of rooms (owner name and totals, never the code).
 Stored in Firebase Firestore, project `avtalbulbul` (`docs/room.js`). Access rules are in `firestore.rules`: paste them into
 Firebase console > Firestore Database > Rules after changing them.
 

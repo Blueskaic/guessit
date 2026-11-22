@@ -70,6 +70,7 @@ td:not(:first-child), th:not(:first-child) { text-align:left; font-variant-numer
   </header>
   <div class="tiles" id="tiles"></div>
   <div class="grid2">
+    <section class="card"><h2>👥 חדרים</h2><div id="rooms"></div></section>
     <section class="card"><h2>סבבים ב-14 הימים האחרונים</h2><div id="dRounds"></div></section>
     <section class="card"><h2>כניסות לאתר ב-14 הימים האחרונים</h2><div id="dVisits"></div></section>
     <section class="card"><h2>קטגוריות פופולריות <span class="sub">(בכמה סבבים נבחרו)</span></h2><div id="cats"></div></section>
@@ -101,19 +102,45 @@ const v = k => V[k] ?? 0;
 const sum = ks => ks.reduce((s, k) => s + v(k), 0);
 const n = x => x.toLocaleString('he');
 const pct = (a, b) => b ? Math.round(100 * a / b) + '%' : '–';
+const esc = s => String(s).replace(/[&<>"']/g, c => `&#${c.charCodeAt(0)};`);  // room owner names come from players
+const LIVE_MS = 150000;  // seen within 2.5 min = online (the game pings every minute)
+let live = null, rooms = null;  // filled by loadNow()
 
-// One request: Firestore docs stats/total and stats/dYYYYMMDD, written by track() in ../index.html.
+// Firestore REST, no SDK. Data is written by ../index.html (stats, live) and ../room.js (roomlist).
+const DB = 'projects/avtalbulbul/databases/(default)/documents';
+const KEY = 'AIzaSyBRCm87xSROL8HU9uKbhRwQx2zcO0JlVs0';
+const api = async (path, body) => {
+  const r = await fetch(`https://firestore.googleapis.com/v1/${DB}${path}${path.includes('?') ? '&' : '?'}key=${KEY}`,
+    body ? { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) } : {});
+  if (!r.ok) throw new Error(r.status);
+  return r.json();
+};
+const num = o => +(o?.integerValue ?? o?.doubleValue ?? 0);
+
+// Online now and the room list, refreshed every 30 s.
+async function loadNow() {
+  try {
+    const [seen, list] = await Promise.all([
+      api(':runQuery', { structuredQuery: { from: [{ collectionId: 'live' }], select: { fields: [{ fieldPath: 'playing' }] },
+        where: { fieldFilter: { field: { fieldPath: 'seen' }, op: 'GREATER_THAN', value: { timestampValue: new Date(Date.now() - LIVE_MS).toISOString() } } } } }),
+      api('/roomlist?pageSize=300'),
+    ]);
+    const docs = seen.filter(x => x.document);
+    live = { online: docs.length, playing: docs.filter(x => x.document.fields?.playing?.booleanValue).length };
+    rooms = (list.documents || []).map(({ fields: f }) => ({ owner: f.owner.stringValue, players: num(f.players), ok: num(f.ok),
+      rounds: num(f.rounds), active: Date.parse(f.active.timestampValue) })).sort((a, b) => b.active - a.active);
+  } catch (e) { console.warn(e); }
+  render();
+}
+loadNow();
+setInterval(loadNow, 30000);
+
+// Totals: stats/total and stats/dYYYYMMDD in one request.
 // Their field names (res_ok, cats.celebs, ...) are mapped to this page's keys (res-ok, cat-celebs, ...).
 (async () => {
-  const db = 'projects/avtalbulbul/databases/(default)/documents';
   try {
-    const r = await fetch(`https://firestore.googleapis.com/v1/${db}:batchGet?key=AIzaSyBRCm87xSROL8HU9uKbhRwQx2zcO0JlVs0`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ documents: ['total', ...DAYS.map(d => 'd' + dayKey(d))].map(id => `${db}/stats/${id}`) }),
-    });
-    if (!r.ok) throw new Error(r.status);
-    const num = o => +(o?.integerValue ?? o?.doubleValue ?? 0);
-    for (const { found } of await r.json()) {
+    const docs = await api(':batchGet', { documents: ['total', ...DAYS.map(d => 'd' + dayKey(d))].map(id => `${DB}/stats/${id}`) });
+    for (const { found } of docs) {
       if (!found) continue;  // a day nobody played
       const id = found.name.split('/').pop(), f = found.fields || {};
       if (id !== 'total') { V['r' + id.slice(1)] = num(f.rounds); V['v' + id.slice(1)] = num(f.visits); continue; }
@@ -152,6 +179,9 @@ function render() {
   const guessed = sum(BUCKETS.map(b => 't' + b[0]));
   const avg = guessed ? BUCKETS.reduce((s, [b, , mid]) => s + mid * v('t' + b), 0) / guessed : 0;
   $('tiles').innerHTML = [
+    [live ? `🟢 ${live.playing}` : '…', 'משחקים עכשיו'],
+    [live ? n(live.online) : '…', 'באתר עכשיו'],
+    [rooms ? n(rooms.length) : '…', 'חדרים'],
     [n(v('rounds')), 'סבבים שוחקו'],
     [n(v('visitors')), 'מכשירים ייחודיים'],
     [n(v('visits')), 'כניסות לאתר'],
@@ -169,6 +199,14 @@ function render() {
   $('cats').innerHTML = top ? `<div class="hb">${cats.map(([name, val]) =>
     `<span>${name}</span><span class="track" data-tip="${name}: ${n(val)} סבבים"><i style="width:${100 * val / top}%"></i></span><b>${n(val)}</b>`).join('')}</div>`
     : '<p class="empty">אין עדיין נתונים</p>';
+
+  const ago = t => {
+    const m = Math.floor((Date.now() - t) / 60000);
+    return Date.now() - t < LIVE_MS ? '🟢 עכשיו' : m < 60 ? `לפני ${m} דק׳` : m < 1440 ? `לפני ${Math.floor(m / 60)} שע׳` : `לפני ${Math.floor(m / 1440)} ימים`;
+  };
+  $('rooms').innerHTML = !rooms ? '<p class="empty">טוען…</p>' : !rooms.length ? '<p class="empty">עוד לא נפתחו חדרים</p>' :
+    `<table><tr><th>חדר</th><th>שחקנים</th><th>ניחושים</th><th>סבבים</th><th>פעילות אחרונה</th></tr>${rooms.map(r =>
+      `<tr><td>החדר של ${esc(r.owner)}</td><td>${n(r.players)}</td><td>${n(r.ok)}</td><td>${n(r.rounds)}</td><td>${ago(r.active)}</td></tr>`).join('')}</table>`;
 
   $('times').innerHTML = columns(BUCKETS.map(([b, l]) => [l, v('t' + b), `${l} שניות: ${n(v('t' + b))} קלפים`]));
 

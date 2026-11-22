@@ -1,5 +1,6 @@
 // Rooms: a closed group of friends, each on their own phone, sharing a leaderboard.
 // Data lives in Firebase Firestore (project avtalbulbul): rooms/{code} and rooms/{code}/players/{player id}.
+// roomlist/{pub} is a public summary per room for the analytics page; its id is not the room code, which stays secret.
 // Access rules: ../firestore.rules. Firebase is only downloaded once the player opens or is in a room.
 const $ = id => document.getElementById(id);
 const SDK = 'https://www.gstatic.com/firebasejs/12.12.0/';
@@ -12,6 +13,7 @@ const CONFIG = {
   appId: '1:28822600882:web:65adf542b881e130e51dab',
 };
 const CODE_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';  // no I/O/0/1 to misread
+const rand = n => Array.from({ length: n }, () => CODE_CHARS[Math.floor(Math.random() * CODE_CHARS.length)]).join('');
 const esc = s => String(s).replace(/[&<>"']/g, c => `&#${c.charCodeAt(0)};`);  // names come from other players
 
 let st = {};  // { pid, name, code, owner } saved on this phone
@@ -24,17 +26,46 @@ let fb;  // promise of { fs: firestore module, db }
 const firebase = () => fb ||= Promise.all([import(SDK + 'firebase-app.js'), import(SDK + 'firebase-firestore.js')])
   .then(([app, fs]) => ({ fs, db: fs.getFirestore(app.initializeApp(CONFIG)) }));
 
-let players = null, unsub, myBest = 0;
+let players = null, unsub, unsubRoom, myBest = 0;
+let adminId = null, isAdmin = false, pushed = '', pushTimer;  // the room admin's phone decides everyone's settings
+const same = s => JSON.stringify([s?.sel, s?.time, s?.prep, s?.nsfw]);  // Firestore may return map keys in another order
+const mine = () => { const c = game.cfg; return { sel: [...c.sel], time: c.time, prep: c.prep, nsfw: c.nsfw }; };
 
 async function listen() {
   unsub?.();
   players = null;
   const { fs, db } = await firebase();
+  if (!st.pub) {  // rooms opened before the public room list existed get their summary id now
+    const ref = fs.doc(db, 'rooms', st.code);
+    try { await fs.updateDoc(ref, { pub: rand(12) }); } catch {}  // allowed only once, so a phone that loses the race just reads the winner's id
+    try { st.pub = (await fs.getDoc(ref)).data()?.pub; save(); } catch {}
+  }
+  unsubRoom?.();
+  unsubRoom = fs.onSnapshot(fs.doc(db, 'rooms', st.code), snap => {
+    const d = snap.data() || {};
+    if (!d.admin && d.owner === st.name) {  // rooms opened before admins existed: the opener's phone claims it (allowed once)
+      fs.updateDoc(snap.ref, { admin: st.pid, settings: mine() }).catch(e => console.warn(e));
+      return;
+    }
+    adminId = d.admin;
+    isAdmin = d.admin === st.pid;
+    if (isAdmin) { pushed = same(d.settings); game.lock(null); }
+    else game.lock(d.settings || null, d.owner);
+    render();
+  }, e => console.warn(e));
+  let summarize = true;  // once per app start, then after every change made from this phone
   unsub = fs.onSnapshot(fs.collection(db, 'rooms', st.code, 'players'), snap => {
     players = snap.docs.map(d => ({ id: d.id, ...d.data() }));
     myBest = players.find(p => p.id === st.pid)?.best || 0;
+    if (st.pub && (summarize || snap.metadata.hasPendingWrites)) { summarize = false; summary(fs, db); }
     render();
   }, e => { console.warn(e); players = []; render(); });
+}
+
+function summary(fs, db) {
+  const total = k => players.reduce((n, p) => n + (p[k] || 0), 0);
+  fs.setDoc(fs.doc(db, 'roomlist', st.pub), { owner: st.owner, players: players.length, ok: total('ok'), rounds: total('rounds'),
+    active: fs.serverTimestamp() }).catch(e => console.warn(e));
 }
 
 function render() {
@@ -45,10 +76,12 @@ function render() {
   if (!st.code) return;
   $('rTitle').textContent = `החדר של ${st.owner}`;
   $('rShow').textContent = st.code;
+  $('rAdmin').textContent = isAdmin ? '👑 אתם מנהלי החדר: הקטגוריות וההגדרות שתבחרו חלות על כל השחקנים.'
+    : adminId ? `👑 ${st.owner} מנהל/ת את החדר וקובע/ת את הקטגוריות וההגדרות.` : '';
   if (!players) { $('board').innerHTML = '<tr><td>טוען…</td></tr>'; return; }
   const rows = [...players].sort((a, b) => b.ok - a.ok || b.best - a.best);
   $('board').innerHTML = '<tr><th>שחקן</th><th>ניחושים</th><th>שיא בסבב</th><th>זמן ממוצע</th><th>סבבים</th></tr>' +
-    rows.map((p, i) => `<tr${p.id === st.pid ? ' class="me"' : ''}><td>${['🥇', '🥈', '🥉'][i] || i + 1} ${esc(p.name)}</td>` +
+    rows.map((p, i) => `<tr${p.id === st.pid ? ' class="me"' : ''}><td>${['🥇', '🥈', '🥉'][i] || i + 1} ${esc(p.name)}${p.id === adminId ? ' 👑' : ''}</td>` +
       `<td>${p.ok}</td><td>${p.best}</td><td>${p.ok ? (p.secs / p.ok).toFixed(1) + ' שנ׳' : '–'}</td><td>${p.rounds}</td></tr>`).join('');
 }
 
@@ -62,24 +95,25 @@ async function join(isNew) {
   fail('מתחבר…');
   try {
     const { fs, db } = await firebase();
-    let owner;
+    let owner, pub;
     if (isNew) {
       for (let tries = 0; !owner; tries++) {  // creating over an existing code is denied by the rules, so retry with a new one
-        code = Array.from({ length: 5 }, () => CODE_CHARS[Math.floor(Math.random() * CODE_CHARS.length)]).join('');
+        code = rand(5);
+        pub = rand(12);
         try {
-          await fs.setDoc(fs.doc(db, 'rooms', code), { owner: name, created: fs.serverTimestamp() });
+          await fs.setDoc(fs.doc(db, 'rooms', code), { owner: name, created: fs.serverTimestamp(), pub, admin: st.pid, settings: mine() });
           owner = name;
         } catch (e) { if (tries >= 2) throw e; }
       }
     } else {
       const room = await fs.getDoc(fs.doc(db, 'rooms', code));
       if (!room.exists()) return fail('לא מצאנו חדר עם הקוד הזה');
-      owner = room.data().owner;
+      ({ owner, pub } = room.data());
     }
     const me = fs.doc(db, 'rooms', code, 'players', st.pid);
     if ((await fs.getDoc(me)).exists()) await fs.updateDoc(me, { name, updated: fs.serverTimestamp() });  // rejoining keeps the score
     else await fs.setDoc(me, { name, ok: 0, skip: 0, time: 0, rounds: 0, best: 0, secs: 0, updated: fs.serverTimestamp() });
-    Object.assign(st, { name, code, owner });
+    Object.assign(st, { name, code, owner, pub });
     save();
     fail('');
     listen();
@@ -101,6 +135,15 @@ async function update(fields) {
   } catch (e) { console.warn(e); }
 }
 window.room = {
+  settings(s) {  // the game calls this whenever its settings change; only the admin's changes are sent (debounced for sliders)
+    if (!isAdmin || !st.code) return;
+    clearTimeout(pushTimer);
+    pushTimer = setTimeout(async () => {
+      if (same(s) === pushed) return;
+      pushed = same(s);
+      try { const { fs, db } = await firebase(); await fs.updateDoc(fs.doc(db, 'rooms', st.code), { settings: s }); } catch (e) { console.warn(e); }
+    }, 700);
+  },
   round: () => update({ rounds: 1 }),
   result(kind, secs, roundOk) {
     if (kind !== 'ok') return update({ [kind]: 1 });
@@ -116,7 +159,13 @@ dlg.onclick = e => { if (e.target === dlg) dlg.close(); };  // click outside = c
 $('rJoin').onclick = () => join(false);
 $('rNew').onclick = () => join(true);
 $('rCode').oninput = e => { e.target.value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, ''); };
-$('rLeave').onclick = () => { unsub?.(); delete st.code; save(); render(); };  // the score stays in the room if you come back
+const leave = () => {
+  unsub?.(); unsubRoom?.();
+  delete st.code; delete st.pub; save();
+  adminId = null; isAdmin = false;
+  game.lock(null);  // back to this phone's own settings
+};  // the score stays in the room if you come back
+$('rLeave').onclick = () => { leave(); render(); };
 $('rShare').onclick = async () => {
   const url = `${location.origin}${location.pathname}?room=${st.code}`;
   const text = `בואו לשחק איתי GuessIt! קוד החדר: ${st.code}`;
@@ -133,7 +182,7 @@ if (invited) history.replaceState(null, '', location.pathname);
 if (st.code) listen();
 render();
 if (invited && invited.toUpperCase() !== st.code) {
-  if (st.code) { unsub?.(); delete st.code; save(); }
+  if (st.code) leave();
   $('rCode').value = invited.toUpperCase();
   open();
 }

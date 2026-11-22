@@ -23,10 +23,6 @@ button { font:inherit; color:inherit; border:0; background:none; }
 header { display:flex; align-items:center; gap:10px; padding:10px 20px; flex-wrap:wrap; }
 .logo { direction:ltr; font-size:28px; font-weight:900; background:linear-gradient(90deg,var(--a1),var(--a2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
 .grow { flex:1; }
-.label { font-size:14px; color:var(--muted); }
-.seg { display:flex; background:var(--panel); border-radius:999px; padding:3px; }
-.seg button { padding:7px 12px; border-radius:999px; font-size:14px; color:var(--muted); }
-.seg button.on { background:#fff; color:var(--bg); font-weight:700; }
 .pill { background:var(--panel); padding:9px 16px; border-radius:999px; font-size:14px; font-weight:700; }
 #grid { flex:1; overflow-y:auto; padding:4px 20px 96px; display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:12px; align-content:start; }
 .cat { position:relative; height:clamp(110px, 30vh, 150px); border-radius:16px; overflow:hidden; background:var(--panel) 50% 20%/cover; box-shadow:inset 0 0 0 3px transparent; transition:transform .1s; }
@@ -36,8 +32,20 @@ header { display:flex; align-items:center; gap:10px; padding:10px 20px; flex-wra
 .cat span { position:absolute; z-index:1; bottom:8px; right:12px; left:12px; text-align:right; font-size:18px; font-weight:800; }
 .cat small { display:block; font-size:12px; font-weight:400; color:#ddd; }
 .cat.on::before { content:"✓"; position:absolute; z-index:1; top:8px; left:8px; width:28px; height:28px; border-radius:50%; background:var(--a1); display:grid; place-items:center; font-weight:900; }
-#start { position:fixed; bottom:14px; left:50%; transform:translateX(-50%); white-space:nowrap; padding:14px 44px; border-radius:999px; font-size:20px; font-weight:900; background:linear-gradient(90deg,var(--a1),var(--a2)); box-shadow:0 8px 28px rgba(255,79,139,.45); }
+#home::after { content:""; position:fixed; z-index:9; left:0; right:0; bottom:0; height:100px; pointer-events:none; background:linear-gradient(transparent, var(--bg) 60%); }
+#start { position:fixed; z-index:10; bottom:14px; left:50%; transform:translateX(-50%); white-space:nowrap; padding:14px 44px; border-radius:999px; font-size:20px; font-weight:900; background:linear-gradient(90deg,var(--a1),var(--a2)); box-shadow:0 8px 28px rgba(255,79,139,.45); }
 #start:disabled { filter:grayscale(1); opacity:.45; box-shadow:none; }
+
+/* settings */
+dialog { margin:auto; border:0; border-radius:20px; padding:18px 22px; width:min(440px, 92vw); max-height:94vh; background:var(--panel); color:#fff; }
+dialog::backdrop { background:rgba(0,0,0,.65); }
+dialog h3 { font-size:20px; margin-bottom:6px; }
+dialog label { display:flex; justify-content:space-between; align-items:baseline; margin-top:10px; font-size:15px; color:var(--muted); }
+dialog label b { font-size:20px; color:#fff; }
+.slider { display:flex; align-items:center; gap:10px; direction:ltr; margin-top:4px; }
+.slider input { flex:1; height:32px; accent-color:var(--a1); }
+.slider button { width:42px; height:42px; flex:none; border-radius:50%; background:rgba(255,255,255,.14); font-size:24px; font-weight:700; }
+dialog .btn { display:block; margin:16px auto 0; background:linear-gradient(90deg,var(--a1),var(--a2)); color:#fff; }
 
 /* countdown */
 #count { align-items:center; justify-content:center; text-align:center; background:radial-gradient(circle, #3c2b80, var(--bg) 70%); }
@@ -83,13 +91,21 @@ header { display:flex; align-items:center; gap:10px; padding:10px 20px; flex-wra
   <header>
     <div class="logo">GuessIt?</div>
     <div class="grow"></div>
-    <span class="label">זמן לניחוש:</span>
-    <div class="seg" id="times"></div>
+    <button class="pill" id="setBtn" onclick="$('settings').showModal()"></button>
     <button class="pill" id="all"></button>
   </header>
   <div id="grid"></div>
   <button id="start"></button>
 </section>
+
+<dialog id="settings">
+  <h3>⏱ הגדרות טיימר</h3>
+  <label>זמן לכל קלף <b id="timeVal"></b></label>
+  <div class="slider"><button data-for="time" data-step="-5">−</button><input type="range" id="time" min="0" max="300" step="5"><button data-for="time" data-step="5">+</button></div>
+  <label>ספירה לאחור לפני הקלף <b id="prepVal"></b></label>
+  <div class="slider"><button data-for="prep" data-step="-1">−</button><input type="range" id="prep" min="1" max="15" step="1"><button data-for="prep" data-step="1">+</button></div>
+  <button class="btn" autofocus onclick="$('settings').close()">שמור</button>
+</dialog>
 
 <section id="count" class="screen">
   <button class="x" onclick="goBack()">✕</button>
@@ -120,13 +136,12 @@ header { display:flex; align-items:center; gap:10px; padding:10px 20px; flex-wra
 
 <script src="cards.js"></script>
 <script>
-const COUNTDOWN = 5;    // seconds to lift the phone to the forehead
 const GRACE_MS = 800;   // ignore taps right after the card appears (bumps while lifting)
-const TIMES = [[0, 'ללא הגבלה'], [30, '30 שנ׳'], [60, 'דקה'], [90, '90 שנ׳'], [120, '2 דק׳']];
 const VERDICTS = { ok: 'ניחשתם! 🎉', skip: 'דילגתם', time: 'נגמר הזמן! ⏰' };
 
 const $ = id => document.getElementById(id);
-let cfg = { sel: [], time: 0 };
+const fmt = s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+let cfg = { sel: [], time: 0, prep: 5 };  // time: seconds per card (0 = unlimited), prep: countdown before the card
 try { Object.assign(cfg, JSON.parse(localStorage.guessit || '{}')); } catch {}
 const saveCfg = () => { try { localStorage.guessit = JSON.stringify(cfg); } catch {} };
 
@@ -160,13 +175,15 @@ for (const c of CATEGORIES) {
   };
   $('grid').append(b);
 }
-for (const [sec, label] of TIMES) {
-  const b = document.createElement('button');
-  b.textContent = label;
-  b.dataset.sec = sec;
-  b.onclick = () => { cfg.time = sec; refresh(); };
-  $('times').append(b);
+for (const key of ['time', 'prep']) {
+  $(key).value = cfg[key];
+  $(key).oninput = () => { cfg[key] = +$(key).value; refresh(); };
 }
+document.querySelectorAll('.slider button').forEach(b => b.onclick = () => {
+  const r = $(b.dataset.for);
+  r.value = +r.value + +b.dataset.step;  // the browser clamps to min/max
+  r.oninput();
+});
 $('all').onclick = () => {
   cfg.sel = selected().length === CATEGORIES.length ? [] : CATEGORIES.map(c => c.id);
   refresh();
@@ -185,7 +202,9 @@ document.addEventListener('visibilitychange', () => { if (wakeLock && document.v
 function refresh() {
   const sel = selected(), n = sel.reduce((s, c) => s + c.items.length, 0);
   document.querySelectorAll('.cat').forEach(b => b.classList.toggle('on', cfg.sel.includes(b.dataset.id)));
-  document.querySelectorAll('#times button').forEach(b => b.classList.toggle('on', +b.dataset.sec === cfg.time));
+  $('timeVal').textContent = cfg.time ? fmt(cfg.time) : 'ללא הגבלה';
+  $('prepVal').textContent = `${cfg.prep} שנ׳`;
+  $('setBtn').textContent = `⏱ ${cfg.time ? fmt(cfg.time) : 'ללא הגבלה'}`;
   $('all').textContent = sel.length === CATEGORIES.length ? 'נקה הכל' : 'בחר הכל';
   $('start').disabled = !n;
   $('start').textContent = n ? `יאללה, מתחילים! (${n} קלפים)` : 'בחרו קטגוריה';
@@ -197,7 +216,6 @@ refresh();
 let deck = [], cur, stats, shownAt = 0, timers = [];
 const stopTimers = () => { timers.forEach(clearTimeout); timers = []; }; // clearTimeout also clears intervals (shared timer list per HTML spec)
 const show = id => document.querySelectorAll('.screen').forEach(s => s.classList.toggle('on', s.id === id));
-const fmt = s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
 
 function shuffle(a) {
   for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
@@ -217,7 +235,7 @@ function next() {
   $('name').textContent = $('rname').textContent = cur.name;
   $('catname').textContent = cur.cat;
   show('count');
-  let n = COUNTDOWN;
+  let n = cfg.prep;
   (function tick() {
     if (!n) return reveal();
     const el = $('num');

@@ -672,6 +672,145 @@ const CATEGORIES = [
   ]
  },
  {
+  "id": "cities",
+  "name": "ערים",
+  "cover": "img/b5eed9442adc.jpg",
+  "items": [
+   {
+    "name": "תל אביב",
+    "img": "img/b5eed9442adc.jpg"
+   },
+   {
+    "name": "ירושלים",
+    "img": "img/0a5ed43ab1e2.jpg"
+   },
+   {
+    "name": "חיפה",
+    "img": "img/874df54deb45.jpg"
+   },
+   {
+    "name": "אילת",
+    "img": "img/cf6993260747.jpg"
+   },
+   {
+    "name": "באר שבע",
+    "img": "img/25ba93cae8ce.jpg"
+   },
+   {
+    "name": "טבריה",
+    "img": "img/dae482be3335.jpg"
+   },
+   {
+    "name": "נתניה",
+    "img": "img/e6fd2bfe2eca.jpg"
+   },
+   {
+    "name": "עכו",
+    "img": "img/f65b1264a8bd.jpg"
+   },
+   {
+    "name": "ניו יורק",
+    "img": "img/d97e023dce2b.jpg"
+   },
+   {
+    "name": "פריז",
+    "img": "img/e20d37a5d7fc.jpg"
+   },
+   {
+    "name": "לונדון",
+    "img": "img/59ead8d1e124.jpg"
+   },
+   {
+    "name": "רומא",
+    "img": "img/1f49f770adc6.jpg"
+   },
+   {
+    "name": "ברצלונה",
+    "img": "img/550d05ab240e.jpg"
+   },
+   {
+    "name": "אמסטרדם",
+    "img": "img/3eb8670d999a.jpg"
+   },
+   {
+    "name": "ברלין",
+    "img": "img/ee1611b61f56.jpg"
+   },
+   {
+    "name": "טוקיו",
+    "img": "img/62413a57c5e3.jpg"
+   },
+   {
+    "name": "דובאי",
+    "img": "img/23b998b19b5f.jpg"
+   },
+   {
+    "name": "לאס וגאס",
+    "img": "img/05c27bf00932.jpg"
+   },
+   {
+    "name": "לוס אנג'לס",
+    "img": "img/d0aa2dffa0da.jpg"
+   },
+   {
+    "name": "ריו דה ז'ניירו",
+    "img": "img/5cfd5837c67e.jpg"
+   },
+   {
+    "name": "סידני",
+    "img": "img/1fc91e869628.jpg"
+   },
+   {
+    "name": "איסטנבול",
+    "img": "img/0ef8f876d62a.jpg"
+   },
+   {
+    "name": "פראג",
+    "img": "img/a71105026dfe.jpg"
+   },
+   {
+    "name": "אתונה",
+    "img": "img/e14045c6b4fe.jpg"
+   },
+   {
+    "name": "בנגקוק",
+    "img": "img/3d147c6ba113.jpg"
+   },
+   {
+    "name": "מוסקבה",
+    "img": "img/7e35e74e6101.jpg"
+   },
+   {
+    "name": "קהיר",
+    "img": "img/b181c43993de.jpg"
+   },
+   {
+    "name": "סינגפור",
+    "img": "img/b26680900ed9.jpg"
+   },
+   {
+    "name": "הונג קונג",
+    "img": "img/1eaed874deef.jpg"
+   },
+   {
+    "name": "מיאמי",
+    "img": "img/0f5de708d2f6.jpg"
+   },
+   {
+    "name": "סן פרנסיסקו",
+    "img": "img/f4334fdfa1c7.jpg"
+   },
+   {
+    "name": "בודפשט",
+    "img": "img/9fed5dae86e3.jpg"
+   },
+   {
+    "name": "וינה",
+    "img": "img/601f9226a92f.jpg"
+   }
+  ]
+ },
+ {
   "id": "places",
   "name": "מקומות",
   "cover": "img/998c24f02ed9.jpg",
@@ -1018,320 +1157,6 @@ const CATEGORIES = [
   ]
  },
  {
-  "id": "jobs",
-  "name": "מקצועות",
-  "cover": "img/b74ad4852301.jpg",
-  "items": [
-   {
-    "name": "כבאי",
-    "img": "img/b74ad4852301.jpg"
-   },
-   {
-    "name": "שוטר",
-    "img": "img/fbb59c3d4a8e.jpg"
-   },
-   {
-    "name": "רופא",
-    "img": "img/f79b5dc3e6e1.jpg"
-   },
-   {
-    "name": "אחות",
-    "img": "img/51202d248e4f.jpg"
-   },
-   {
-    "name": "מנתח",
-    "img": "img/15e955030b28.jpg"
-   },
-   {
-    "name": "שף",
-    "img": "img/8fd82b8864d7.jpg"
-   },
-   {
-    "name": "טייס",
-    "img": "img/246cafc49600.jpg"
-   },
-   {
-    "name": "מורה",
-    "img": "img/8ab7bbdf01a2.jpg"
-   },
-   {
-    "name": "אסטרונאוט",
-    "img": "img/46636203ccc3.jpg"
-   },
-   {
-    "name": "חקלאי",
-    "img": "img/8bf7aa45eea8.jpg"
-   },
-   {
-    "name": "רופא שיניים",
-    "img": "img/d54c96649589.jpg"
-   },
-   {
-    "name": "ספר",
-    "img": "img/99b4baa88ec1.jpg"
-   },
-   {
-    "name": "אינסטלטור",
-    "img": "img/78f132269093.jpg"
-   },
-   {
-    "name": "חשמלאי",
-    "img": "img/bc9655249274.jpg"
-   },
-   {
-    "name": "נגר",
-    "img": "img/6a7ac0ba6162.jpg"
-   },
-   {
-    "name": "מציל",
-    "img": "img/bcb9069a4dfa.jpg"
-   },
-   {
-    "name": "חייל",
-    "img": "img/de75f2eb4393.jpg"
-   },
-   {
-    "name": "שופט",
-    "img": "img/935ff3fccfa3.jpg"
-   },
-   {
-    "name": "עורך דין",
-    "img": "img/578b7eac4dfb.jpg"
-   },
-   {
-    "name": "צלם",
-    "img": "img/a0cceed7cae2.jpg"
-   },
-   {
-    "name": "דוור",
-    "img": "img/32042e2added.jpg"
-   },
-   {
-    "name": "מלצר",
-    "img": "img/306e95795691.jpg"
-   },
-   {
-    "name": "אופה",
-    "img": "img/f30b7f25f10a.jpg"
-   },
-   {
-    "name": "קצב",
-    "img": "img/83882de81950.jpg"
-   },
-   {
-    "name": "וטרינר",
-    "img": "img/9aa5f76c7036.jpg"
-   },
-   {
-    "name": "דייג",
-    "img": "img/3434282fe3ea.jpg"
-   },
-   {
-    "name": "פועל בניין",
-    "img": "img/93e3edcc7c1b.jpg"
-   },
-   {
-    "name": "מתכנת",
-    "img": "img/987c70ecbcd6.jpg"
-   },
-   {
-    "name": "מדען",
-    "img": "img/9a15881cc8ac.jpg"
-   },
-   {
-    "name": "ליצן",
-    "img": "img/2e3b398e2fad.jpg"
-   },
-   {
-    "name": "קוסם",
-    "img": "img/5f9435d83d93.jpg"
-   },
-   {
-    "name": "נהג מונית",
-    "img": "img/4d5b1fee2ba7.jpg"
-   },
-   {
-    "name": "תקליטן (די ג'יי)",
-    "img": "img/a01934b21a56.jpg"
-   },
-   {
-    "name": "מכונאי",
-    "img": "img/64eb669723ca.jpg"
-   },
-   {
-    "name": "אדריכל",
-    "img": "img/4bb5da084da7.jpg"
-   },
-   {
-    "name": "רוקח",
-    "img": "img/7f85ffeaa605.jpg"
-   },
-   {
-    "name": "מאבטח",
-    "img": "img/e19e824947bc.jpg"
-   },
-   {
-    "name": "דייל",
-    "img": "img/25a14ca01ce7.jpg"
-   },
-   {
-    "name": "קופאי",
-    "img": "img/e7f85ad20539.jpg"
-   },
-   {
-    "name": "גנן",
-    "img": "img/a5e635fa28d2.jpg"
-   }
-  ]
- },
- {
-  "id": "events",
-  "name": "אירועים היסטוריים",
-  "cover": "img/a08a70bf31cd.jpg",
-  "items": [
-   {
-    "name": "פיגועי 11 בספטמבר",
-    "img": "img/a08a70bf31cd.jpg"
-   },
-   {
-    "name": "הנחיתה על הירח",
-    "img": "img/7f935440a50f.jpg"
-   },
-   {
-    "name": "נפילת חומת ברלין",
-    "img": "img/366a95e13dc8.jpg"
-   },
-   {
-    "name": "טביעת הטיטאניק",
-    "img": "img/c54e6f7dd4da.jpg"
-   },
-   {
-    "name": "אסון צ'רנוביל",
-    "img": "img/1c3f20328c3b.jpg"
-   },
-   {
-    "name": "מגפת הקורונה",
-    "img": "img/370c8f5be2a9.jpg"
-   },
-   {
-    "name": "מלחמת ששת הימים",
-    "img": "img/5c3308eed594.jpg"
-   },
-   {
-    "name": "מלחמת יום כיפור",
-    "img": "img/b36b13bde2b7.jpg"
-   },
-   {
-    "name": "מבצע אנטבה",
-    "img": "img/3fca74efc2bc.jpg"
-   },
-   {
-    "name": "רצח רבין",
-    "img": "img/a11c7601885f.jpg"
-   },
-   {
-    "name": "רצח קנדי",
-    "img": "img/ea9720731888.jpg"
-   },
-   {
-    "name": "פצצת האטום על הירושימה",
-    "img": "img/21d2957a2e6e.jpg"
-   },
-   {
-    "name": "הכרזת העצמאות",
-    "img": "img/e22558de02ea.jpg"
-   },
-   {
-    "name": "הצונאמי באוקיינוס ההודי",
-    "img": "img/b5e7ac1ad024.jpg"
-   },
-   {
-    "name": "המהפכה הצרפתית",
-    "img": "img/27ab5e58f78f.jpg"
-   },
-   {
-    "name": "פסטיבל וודסטוק",
-    "img": "img/ce2d51a2fe5e.jpg"
-   },
-   {
-    "name": "גילוי אמריקה",
-    "img": "img/4c2ec84dd537.jpg"
-   },
-   {
-    "name": "מלחמת העולם הראשונה",
-    "img": "img/f326581f3a34.jpg"
-   },
-   {
-    "name": "מלחמת העולם השנייה",
-    "img": "img/fbb78bbe6849.jpg"
-   },
-   {
-    "name": "ההתקפה על פרל הארבור",
-    "img": "img/670da6201b16.jpg"
-   },
-   {
-    "name": "הפלישה לנורמנדי",
-    "img": "img/1c39a0ee564b.jpg"
-   },
-   {
-    "name": "אסון פוקושימה",
-    "img": "img/a3ba1861651e.jpg"
-   },
-   {
-    "name": "הוריקן קתרינה",
-    "img": "img/f7320e619d6e.jpg"
-   },
-   {
-    "name": "הטיסה הראשונה של האחים רייט",
-    "img": "img/c5d9a0b20a90.jpg"
-   },
-   {
-    "name": "האדם הראשון בחלל (גגארין)",
-    "img": "img/f57a1856eb15.jpg"
-   },
-   {
-    "name": "אסון מעבורת החלל קולומביה",
-    "img": "img/cf3509248b0f.jpg"
-   },
-   {
-    "name": "הסכם השלום עם מצרים",
-    "img": "img/89d85b59b929.jpg"
-   },
-   {
-    "name": "הסכמי אוסלו",
-    "img": "img/f7ae32ab00a9.jpg"
-   },
-   {
-    "name": "מבצע שלמה",
-    "img": "img/6c7cb6c7acf7.jpg"
-   },
-   {
-    "name": "מלחמת המפרץ",
-    "img": "img/920c18ada2f2.jpg"
-   },
-   {
-    "name": "השקת האייפון הראשון",
-    "img": "img/180ccbbac0b4.jpg"
-   },
-   {
-    "name": "החתונה של הנסיך ויליאם וקייט",
-    "img": "img/c0aceee338be.jpg"
-   },
-   {
-    "name": "מותה של הנסיכה דיאנה",
-    "img": "img/f67264aa11f6.jpg"
-   },
-   {
-    "name": "השריפה בנוטרדאם",
-    "img": "img/352255af8977.jpg"
-   },
-   {
-    "name": "התפרצות הר וזוב בפומפיי",
-    "img": "img/06b297e41397.jpg"
-   }
-  ]
- },
- {
   "id": "animals",
   "name": "חיות",
   "cover": "img/c935d187f0b9.jpg",
@@ -1531,6 +1356,1257 @@ const CATEGORIES = [
    {
     "name": "עטלף",
     "img": "img/2d5b3d62e7bd.jpg"
+   }
+  ]
+ },
+ {
+  "id": "objects",
+  "name": "חפצים",
+  "cover": "img/853ca16bda4f.jpg",
+  "items": [
+   {
+    "name": "טלפון חכם",
+    "img": "img/853ca16bda4f.jpg"
+   },
+   {
+    "name": "מטרייה",
+    "img": "img/91e0703aceed.jpg"
+   },
+   {
+    "name": "משקפיים",
+    "img": "img/0f461e64d283.jpg"
+   },
+   {
+    "name": "שעון מעורר",
+    "img": "img/544cafe42620.jpg"
+   },
+   {
+    "name": "כיסא",
+    "img": "img/a60db0f0d5ae.jpg"
+   },
+   {
+    "name": "נורה",
+    "img": "img/73de2c0f6830.jpg"
+   },
+   {
+    "name": "מפתח",
+    "img": "img/4e2b41f0ba50.jpg"
+   },
+   {
+    "name": "מספריים",
+    "img": "img/28204140cee6.jpg"
+   },
+   {
+    "name": "מברשת שיניים",
+    "img": "img/b10b6174b818.jpg"
+   },
+   {
+    "name": "מראה",
+    "img": "img/2403def5083f.jpg"
+   },
+   {
+    "name": "כרית",
+    "img": "img/d9c182949229.jpg"
+   },
+   {
+    "name": "מזוודה",
+    "img": "img/2bce40105b3e.jpg"
+   },
+   {
+    "name": "ארנק",
+    "img": "img/156e132b0143.jpg"
+   },
+   {
+    "name": "עט",
+    "img": "img/ebc8a012ce64.jpg"
+   },
+   {
+    "name": "מחשב נייד",
+    "img": "img/146bdebb324a.jpg"
+   },
+   {
+    "name": "שלט רחוק",
+    "img": "img/be41de8c24f3.jpg"
+   },
+   {
+    "name": "אוזניות",
+    "img": "img/dcbedde0ce40.jpg"
+   },
+   {
+    "name": "מצלמה",
+    "img": "img/967d35e40f3f.jpg"
+   },
+   {
+    "name": "פטיש",
+    "img": "img/e16aadf94681.jpg"
+   },
+   {
+    "name": "מברג",
+    "img": "img/deb0087ee4e1.jpg"
+   },
+   {
+    "name": "מקרר",
+    "img": "img/9ed5270571c7.jpg"
+   },
+   {
+    "name": "מכונת כביסה",
+    "img": "img/74cd99038b8b.jpg"
+   },
+   {
+    "name": "מיקרוגל",
+    "img": "img/beeb61d4c50e.jpg"
+   },
+   {
+    "name": "מייבש שיער",
+    "img": "img/ede250950506.jpg"
+   },
+   {
+    "name": "ספל",
+    "img": "img/085ebaaa8534.jpg"
+   },
+   {
+    "name": "נר",
+    "img": "img/e966b2e6caa2.jpg"
+   },
+   {
+    "name": "מטאטא",
+    "img": "img/86f98fc116d6.jpg"
+   },
+   {
+    "name": "מאוורר",
+    "img": "img/0dfb2beaedd7.jpg"
+   },
+   {
+    "name": "קומקום",
+    "img": "img/0753308a01e4.jpg"
+   },
+   {
+    "name": "בלון",
+    "img": "img/fb84503bdc0b.jpg"
+   },
+   {
+    "name": "כובע",
+    "img": "img/a10d7a62aaff.jpg"
+   },
+   {
+    "name": "נעל",
+    "img": "img/73f7830328e2.jpg"
+   },
+   {
+    "name": "גרב",
+    "img": "img/19d64924b5f5.jpg"
+   },
+   {
+    "name": "קובייה הונגרית",
+    "img": "img/dc1a3ac5e14c.jpg"
+   },
+   {
+    "name": "מזלג",
+    "img": "img/36c81967df34.jpg"
+   },
+   {
+    "name": "סכין",
+    "img": "img/d39d7a2bb6d4.jpg"
+   },
+   {
+    "name": "מטבע",
+    "img": "img/ff45bd9a024c.jpg"
+   },
+   {
+    "name": "מטף",
+    "img": "img/1658a4b9260c.jpg"
+   }
+  ]
+ },
+ {
+  "id": "vehicles",
+  "name": "כלי תחבורה",
+  "cover": "img/e9989db5dabe.jpg",
+  "items": [
+   {
+    "name": "מכונית",
+    "img": "img/e9989db5dabe.jpg"
+   },
+   {
+    "name": "אוטובוס",
+    "img": "img/6e4b38bfd577.jpg"
+   },
+   {
+    "name": "רכבת",
+    "img": "img/e41273f43af5.jpg"
+   },
+   {
+    "name": "מטוס",
+    "img": "img/54118ed33b4e.jpg"
+   },
+   {
+    "name": "מסוק",
+    "img": "img/2ab8b43468e8.jpg"
+   },
+   {
+    "name": "אופניים",
+    "img": "img/78efcae683f1.jpg"
+   },
+   {
+    "name": "אופנוע",
+    "img": "img/5683df776e94.jpg"
+   },
+   {
+    "name": "קטנוע",
+    "img": "img/039c8e6db327.jpg"
+   },
+   {
+    "name": "קורקינט",
+    "img": "img/9c2808353bd7.jpg"
+   },
+   {
+    "name": "משאית",
+    "img": "img/6f13850d3346.jpg"
+   },
+   {
+    "name": "טרקטור",
+    "img": "img/8029d0d49e9e.jpg"
+   },
+   {
+    "name": "סירה",
+    "img": "img/f769aafbc2b8.jpg"
+   },
+   {
+    "name": "ספינת תענוגות",
+    "img": "img/6f8f88fca53b.jpg"
+   },
+   {
+    "name": "צוללת",
+    "img": "img/0d234e5bcf75.jpg"
+   },
+   {
+    "name": "מעבורת חלל",
+    "img": "img/629d424f1010.jpg"
+   },
+   {
+    "name": "טיל",
+    "img": "img/15e8bfff2c10.jpg"
+   },
+   {
+    "name": "כדור פורח",
+    "img": "img/d1172aaf75d5.jpg"
+   },
+   {
+    "name": "רכבל",
+    "img": "img/c09491655a3b.jpg"
+   },
+   {
+    "name": "טנק",
+    "img": "img/71242c9c8a85.jpg"
+   },
+   {
+    "name": "אמבולנס",
+    "img": "img/d075e43e3716.jpg"
+   },
+   {
+    "name": "כבאית",
+    "img": "img/8b4e56c45c2a.jpg"
+   },
+   {
+    "name": "רכבת תחתית",
+    "img": "img/416766a78be4.jpg"
+   },
+   {
+    "name": "רכבת קלה",
+    "img": "img/8f95e20d7297.jpg"
+   },
+   {
+    "name": "קרוואן",
+    "img": "img/a687e7a980b1.jpg"
+   },
+   {
+    "name": "קאנו",
+    "img": "img/8d3241d67b2c.jpg"
+   },
+   {
+    "name": "יאכטה",
+    "img": "img/1c8029c659ed.jpg"
+   },
+   {
+    "name": "מטוס קרב",
+    "img": "img/3ec4fbba236b.jpg"
+   },
+   {
+    "name": "טרקטורון",
+    "img": "img/30873ba8161f.jpg"
+   },
+   {
+    "name": "מלגזה",
+    "img": "img/46c0e3c736a2.jpg"
+   },
+   {
+    "name": "דחפור",
+    "img": "img/78c01dfe157c.jpg"
+   },
+   {
+    "name": "לימוזינה",
+    "img": "img/e707fa8cdb24.jpg"
+   },
+   {
+    "name": "רכבת הרים",
+    "img": "img/5241d1ba2728.jpg"
+   },
+   {
+    "name": "גונדולה",
+    "img": "img/1d09e8ceb0a9.jpg"
+   },
+   {
+    "name": "כרכרה",
+    "img": "img/f6fc8405d49c.jpg"
+   }
+  ]
+ },
+ {
+  "id": "instruments",
+  "name": "כלי נגינה",
+  "cover": "img/ae9b9e717bbd.jpg",
+  "items": [
+   {
+    "name": "גיטרה",
+    "img": "img/ae9b9e717bbd.jpg"
+   },
+   {
+    "name": "פסנתר",
+    "img": "img/060e8e88876d.jpg"
+   },
+   {
+    "name": "כינור",
+    "img": "img/038810d0fea9.jpg"
+   },
+   {
+    "name": "תופים",
+    "img": "img/b95c82f62228.jpg"
+   },
+   {
+    "name": "חליל",
+    "img": "img/14df6ecbe5be.jpg"
+   },
+   {
+    "name": "חצוצרה",
+    "img": "img/142e3acd3610.jpg"
+   },
+   {
+    "name": "סקסופון",
+    "img": "img/1f1ec2ae1fc9.jpg"
+   },
+   {
+    "name": "נבל",
+    "img": "img/0015d99e6518.jpg"
+   },
+   {
+    "name": "אקורדיון",
+    "img": "img/4d5aae0b218a.jpg"
+   },
+   {
+    "name": "מפוחית",
+    "img": "img/e875dfd59e29.jpg"
+   },
+   {
+    "name": "צ'לו",
+    "img": "img/1a1f249ab617.jpg"
+   },
+   {
+    "name": "קונטרבס",
+    "img": "img/1f54e4e76188.jpg"
+   },
+   {
+    "name": "קלרינט",
+    "img": "img/677486bf1fb6.jpg"
+   },
+   {
+    "name": "טרומבון",
+    "img": "img/06ee321811c5.jpg"
+   },
+   {
+    "name": "טובה",
+    "img": "img/67c48112a7fe.jpg"
+   },
+   {
+    "name": "יוקלילי",
+    "img": "img/3af3630b7817.jpg"
+   },
+   {
+    "name": "דרבוקה",
+    "img": "img/978e4dd9de1b.jpg"
+   },
+   {
+    "name": "בוזוקי",
+    "img": "img/6e305714b5ea.jpg"
+   },
+   {
+    "name": "שופר",
+    "img": "img/12a270a7ccde.jpg"
+   },
+   {
+    "name": "קסילופון",
+    "img": "img/f18860f5f0fb.jpg"
+   },
+   {
+    "name": "משולש",
+    "img": "img/54ffe1fb50a0.jpg"
+   },
+   {
+    "name": "מצלתיים",
+    "img": "img/8bf03d002dab.jpg"
+   },
+   {
+    "name": "עוגב",
+    "img": "img/626641dac016.jpg"
+   },
+   {
+    "name": "חלילית",
+    "img": "img/3a037d96d5b8.jpg"
+   },
+   {
+    "name": "גיטרה חשמלית",
+    "img": "img/b44421b51d1e.jpg"
+   },
+   {
+    "name": "סינתיסייזר",
+    "img": "img/900ed6d185c7.jpg"
+   },
+   {
+    "name": "חמת חלילים",
+    "img": "img/e51777fa1b08.jpg"
+   },
+   {
+    "name": "טמבורין",
+    "img": "img/a9896b73ba71.jpg"
+   },
+   {
+    "name": "סיטאר",
+    "img": "img/a7f8b3381f38.jpg"
+   },
+   {
+    "name": "עוד",
+    "img": "img/6ff90e097786.jpg"
+   }
+  ]
+ },
+ {
+  "id": "sports",
+  "name": "ענפי ספורט",
+  "cover": "img/81271228cba0.jpg",
+  "items": [
+   {
+    "name": "כדורגל",
+    "img": "img/81271228cba0.jpg"
+   },
+   {
+    "name": "כדורסל",
+    "img": "img/c71a18083d9e.jpg"
+   },
+   {
+    "name": "טניס",
+    "img": "img/0c493d20a119.jpg"
+   },
+   {
+    "name": "שחייה",
+    "img": "img/9158924426b3.jpg"
+   },
+   {
+    "name": "גלישת גלים",
+    "img": "img/23476022a493.jpg"
+   },
+   {
+    "name": "סקי",
+    "img": "img/49c89c46e533.jpg"
+   },
+   {
+    "name": "איגרוף",
+    "img": "img/19bf99f6abb9.jpg"
+   },
+   {
+    "name": "ג'ודו",
+    "img": "img/73a1b10caa8e.jpg"
+   },
+   {
+    "name": "התעמלות מכשירים",
+    "img": "img/03b87dbf242d.jpg"
+   },
+   {
+    "name": "כדורעף",
+    "img": "img/c26e2589e250.jpg"
+   },
+   {
+    "name": "כדוריד",
+    "img": "img/b49b2084a9c5.jpg"
+   },
+   {
+    "name": "בייסבול",
+    "img": "img/ea94a7ff1f4c.jpg"
+   },
+   {
+    "name": "פוטבול אמריקאי",
+    "img": "img/1e55a651ed48.jpg"
+   },
+   {
+    "name": "גולף",
+    "img": "img/690c3b104256.jpg"
+   },
+   {
+    "name": "הוקי קרח",
+    "img": "img/3d7f6595bc43.jpg"
+   },
+   {
+    "name": "רכיבת אופניים",
+    "img": "img/d6e3142ca705.jpg"
+   },
+   {
+    "name": "פורמולה 1",
+    "img": "img/267f48aa82ee.jpg"
+   },
+   {
+    "name": "החלקה אמנותית",
+    "img": "img/b1a63be79fa5.jpg"
+   },
+   {
+    "name": "טניס שולחן",
+    "img": "img/a60f5b89e150.jpg"
+   },
+   {
+    "name": "באולינג",
+    "img": "img/fe98b2b3f214.jpg"
+   },
+   {
+    "name": "קשתות",
+    "img": "img/bb064091fdc6.jpg"
+   },
+   {
+    "name": "סיוף",
+    "img": "img/ad0b8f049250.jpg"
+   },
+   {
+    "name": "מרתון",
+    "img": "img/0c7320e0548b.jpg"
+   },
+   {
+    "name": "קפיצה לגובה",
+    "img": "img/998fc5c35d38.jpg"
+   },
+   {
+    "name": "קפיצה במוט",
+    "img": "img/91d86a14be26.jpg"
+   },
+   {
+    "name": "סקייטבורד",
+    "img": "img/6ed5379ca270.jpg"
+   },
+   {
+    "name": "טיפוס ספורטיבי",
+    "img": "img/d89e765b7cfe.jpg"
+   },
+   {
+    "name": "רכיבה על סוסים",
+    "img": "img/575295b2c0db.jpg"
+   },
+   {
+    "name": "שחמט",
+    "img": "img/0727c24ec484.jpg"
+   },
+   {
+    "name": "חצים (דארטס)",
+    "img": "img/676ff0cc57a8.jpg"
+   },
+   {
+    "name": "כדורמים",
+    "img": "img/8e284cf470af.jpg"
+   },
+   {
+    "name": "סנובורד",
+    "img": "img/3b8d1c7af927.jpg"
+   },
+   {
+    "name": "קראטה",
+    "img": "img/777407644c37.jpg"
+   },
+   {
+    "name": "הרמת משקולות",
+    "img": "img/a66acea490ec.jpg"
+   },
+   {
+    "name": "היאבקות",
+    "img": "img/d41d8c4d7ec7.jpg"
+   },
+   {
+    "name": "רוגבי",
+    "img": "img/6e0cdf99cec6.jpg"
+   },
+   {
+    "name": "קריקט",
+    "img": "img/a90edc84faeb.jpg"
+   }
+  ]
+ },
+ {
+  "id": "jobs",
+  "name": "מקצועות",
+  "cover": "img/b74ad4852301.jpg",
+  "items": [
+   {
+    "name": "כבאי",
+    "img": "img/b74ad4852301.jpg"
+   },
+   {
+    "name": "שוטר",
+    "img": "img/fbb59c3d4a8e.jpg"
+   },
+   {
+    "name": "רופא",
+    "img": "img/f79b5dc3e6e1.jpg"
+   },
+   {
+    "name": "אחות",
+    "img": "img/51202d248e4f.jpg"
+   },
+   {
+    "name": "מנתח",
+    "img": "img/15e955030b28.jpg"
+   },
+   {
+    "name": "שף",
+    "img": "img/8fd82b8864d7.jpg"
+   },
+   {
+    "name": "טייס",
+    "img": "img/246cafc49600.jpg"
+   },
+   {
+    "name": "מורה",
+    "img": "img/8ab7bbdf01a2.jpg"
+   },
+   {
+    "name": "אסטרונאוט",
+    "img": "img/46636203ccc3.jpg"
+   },
+   {
+    "name": "חקלאי",
+    "img": "img/8bf7aa45eea8.jpg"
+   },
+   {
+    "name": "רופא שיניים",
+    "img": "img/d54c96649589.jpg"
+   },
+   {
+    "name": "ספר",
+    "img": "img/99b4baa88ec1.jpg"
+   },
+   {
+    "name": "אינסטלטור",
+    "img": "img/78f132269093.jpg"
+   },
+   {
+    "name": "חשמלאי",
+    "img": "img/bc9655249274.jpg"
+   },
+   {
+    "name": "נגר",
+    "img": "img/6a7ac0ba6162.jpg"
+   },
+   {
+    "name": "מציל",
+    "img": "img/bcb9069a4dfa.jpg"
+   },
+   {
+    "name": "חייל",
+    "img": "img/de75f2eb4393.jpg"
+   },
+   {
+    "name": "שופט",
+    "img": "img/935ff3fccfa3.jpg"
+   },
+   {
+    "name": "עורך דין",
+    "img": "img/578b7eac4dfb.jpg"
+   },
+   {
+    "name": "צלם",
+    "img": "img/a0cceed7cae2.jpg"
+   },
+   {
+    "name": "דוור",
+    "img": "img/32042e2added.jpg"
+   },
+   {
+    "name": "מלצר",
+    "img": "img/306e95795691.jpg"
+   },
+   {
+    "name": "אופה",
+    "img": "img/f30b7f25f10a.jpg"
+   },
+   {
+    "name": "קצב",
+    "img": "img/83882de81950.jpg"
+   },
+   {
+    "name": "וטרינר",
+    "img": "img/9aa5f76c7036.jpg"
+   },
+   {
+    "name": "דייג",
+    "img": "img/3434282fe3ea.jpg"
+   },
+   {
+    "name": "פועל בניין",
+    "img": "img/93e3edcc7c1b.jpg"
+   },
+   {
+    "name": "מתכנת",
+    "img": "img/987c70ecbcd6.jpg"
+   },
+   {
+    "name": "מדען",
+    "img": "img/9a15881cc8ac.jpg"
+   },
+   {
+    "name": "ליצן",
+    "img": "img/2e3b398e2fad.jpg"
+   },
+   {
+    "name": "קוסם",
+    "img": "img/5f9435d83d93.jpg"
+   },
+   {
+    "name": "נהג מונית",
+    "img": "img/4d5b1fee2ba7.jpg"
+   },
+   {
+    "name": "תקליטן (די ג'יי)",
+    "img": "img/a01934b21a56.jpg"
+   },
+   {
+    "name": "מכונאי",
+    "img": "img/64eb669723ca.jpg"
+   },
+   {
+    "name": "אדריכל",
+    "img": "img/4bb5da084da7.jpg"
+   },
+   {
+    "name": "רוקח",
+    "img": "img/7f85ffeaa605.jpg"
+   },
+   {
+    "name": "מאבטח",
+    "img": "img/e19e824947bc.jpg"
+   },
+   {
+    "name": "דייל",
+    "img": "img/25a14ca01ce7.jpg"
+   },
+   {
+    "name": "קופאי",
+    "img": "img/e7f85ad20539.jpg"
+   },
+   {
+    "name": "גנן",
+    "img": "img/a5e635fa28d2.jpg"
+   }
+  ]
+ },
+ {
+  "id": "holidays",
+  "name": "חגים ומועדים",
+  "cover": "img/b51b70541fb4.jpg",
+  "items": [
+   {
+    "name": "חנוכה",
+    "img": "img/b51b70541fb4.jpg"
+   },
+   {
+    "name": "פורים",
+    "img": "img/2d2f953ea88d.jpg"
+   },
+   {
+    "name": "ליל הסדר",
+    "img": "img/d0b4f75cb0dd.jpg"
+   },
+   {
+    "name": "ראש השנה",
+    "img": "img/cdf0dd37d9ec.jpg"
+   },
+   {
+    "name": "יום כיפור",
+    "img": "img/6d1036bc2e3a.jpg"
+   },
+   {
+    "name": "סוכות",
+    "img": "img/61682b3dc5ff.jpg"
+   },
+   {
+    "name": "שבועות",
+    "img": "img/8d22c649f25c.jpg"
+   },
+   {
+    "name": "ל\"ג בעומר",
+    "img": "img/be7a5dbc539c.jpg"
+   },
+   {
+    "name": "ט\"ו בשבט",
+    "img": "img/077fe472e83b.jpg"
+   },
+   {
+    "name": "יום העצמאות",
+    "img": "img/22dce68774fa.jpg"
+   },
+   {
+    "name": "יום השואה",
+    "img": "img/e9949b6e7d8d.jpg"
+   },
+   {
+    "name": "מימונה",
+    "img": "img/3c0a22b1f232.jpg"
+   },
+   {
+    "name": "בר מצווה",
+    "img": "img/ab5983f7f732.jpg"
+   },
+   {
+    "name": "חתונה",
+    "img": "img/76d9aef27d30.jpg"
+   },
+   {
+    "name": "שבת",
+    "img": "img/2dfdb408044d.jpg"
+   },
+   {
+    "name": "חג המולד",
+    "img": "img/81b616fbff55.jpg"
+   },
+   {
+    "name": "ליל כל הקדושים (האלווין)",
+    "img": "img/e1114432a2ac.jpg"
+   },
+   {
+    "name": "פסחא",
+    "img": "img/e82df739dd8c.jpg"
+   },
+   {
+    "name": "רמדאן",
+    "img": "img/24e38cfd0bee.jpg"
+   },
+   {
+    "name": "דיוואלי",
+    "img": "img/2c90aaf7b123.jpg"
+   },
+   {
+    "name": "השנה הסינית החדשה",
+    "img": "img/0979c8ed43f3.jpg"
+   },
+   {
+    "name": "חג ההודיה",
+    "img": "img/75c8b6f79de8.jpg"
+   },
+   {
+    "name": "ולנטיין",
+    "img": "img/4678d5958bbd.jpg"
+   },
+   {
+    "name": "הקרנבל בריו",
+    "img": "img/df4de347565e.jpg"
+   },
+   {
+    "name": "הולי (פסטיבל הצבעים)",
+    "img": "img/7322279d9aab.jpg"
+   },
+   {
+    "name": "אוקטוברפסט",
+    "img": "img/5ef924c693e1.jpg"
+   },
+   {
+    "name": "ערב השנה החדשה",
+    "img": "img/e376bea053fb.jpg"
+   },
+   {
+    "name": "יום הולדת",
+    "img": "img/aac772216aec.jpg"
+   },
+   {
+    "name": "מצעד הגאווה",
+    "img": "img/c006c73a9ecb.jpg"
+   }
+  ]
+ },
+ {
+  "id": "events",
+  "name": "אירועים היסטוריים",
+  "cover": "img/a08a70bf31cd.jpg",
+  "items": [
+   {
+    "name": "פיגועי 11 בספטמבר",
+    "img": "img/a08a70bf31cd.jpg"
+   },
+   {
+    "name": "הנחיתה על הירח",
+    "img": "img/7f935440a50f.jpg"
+   },
+   {
+    "name": "נפילת חומת ברלין",
+    "img": "img/366a95e13dc8.jpg"
+   },
+   {
+    "name": "טביעת הטיטאניק",
+    "img": "img/c54e6f7dd4da.jpg"
+   },
+   {
+    "name": "אסון צ'רנוביל",
+    "img": "img/1c3f20328c3b.jpg"
+   },
+   {
+    "name": "מגפת הקורונה",
+    "img": "img/370c8f5be2a9.jpg"
+   },
+   {
+    "name": "מלחמת ששת הימים",
+    "img": "img/5c3308eed594.jpg"
+   },
+   {
+    "name": "מלחמת יום כיפור",
+    "img": "img/b36b13bde2b7.jpg"
+   },
+   {
+    "name": "מבצע אנטבה",
+    "img": "img/3fca74efc2bc.jpg"
+   },
+   {
+    "name": "רצח רבין",
+    "img": "img/a11c7601885f.jpg"
+   },
+   {
+    "name": "רצח קנדי",
+    "img": "img/ea9720731888.jpg"
+   },
+   {
+    "name": "פצצת האטום על הירושימה",
+    "img": "img/21d2957a2e6e.jpg"
+   },
+   {
+    "name": "הכרזת העצמאות",
+    "img": "img/e22558de02ea.jpg"
+   },
+   {
+    "name": "הצונאמי באוקיינוס ההודי",
+    "img": "img/b5e7ac1ad024.jpg"
+   },
+   {
+    "name": "המהפכה הצרפתית",
+    "img": "img/27ab5e58f78f.jpg"
+   },
+   {
+    "name": "פסטיבל וודסטוק",
+    "img": "img/ce2d51a2fe5e.jpg"
+   },
+   {
+    "name": "גילוי אמריקה",
+    "img": "img/4c2ec84dd537.jpg"
+   },
+   {
+    "name": "מלחמת העולם הראשונה",
+    "img": "img/f326581f3a34.jpg"
+   },
+   {
+    "name": "מלחמת העולם השנייה",
+    "img": "img/fbb78bbe6849.jpg"
+   },
+   {
+    "name": "ההתקפה על פרל הארבור",
+    "img": "img/670da6201b16.jpg"
+   },
+   {
+    "name": "הפלישה לנורמנדי",
+    "img": "img/1c39a0ee564b.jpg"
+   },
+   {
+    "name": "אסון פוקושימה",
+    "img": "img/a3ba1861651e.jpg"
+   },
+   {
+    "name": "הוריקן קתרינה",
+    "img": "img/f7320e619d6e.jpg"
+   },
+   {
+    "name": "הטיסה הראשונה של האחים רייט",
+    "img": "img/c5d9a0b20a90.jpg"
+   },
+   {
+    "name": "האדם הראשון בחלל (גגארין)",
+    "img": "img/f57a1856eb15.jpg"
+   },
+   {
+    "name": "אסון מעבורת החלל קולומביה",
+    "img": "img/cf3509248b0f.jpg"
+   },
+   {
+    "name": "הסכם השלום עם מצרים",
+    "img": "img/89d85b59b929.jpg"
+   },
+   {
+    "name": "הסכמי אוסלו",
+    "img": "img/f7ae32ab00a9.jpg"
+   },
+   {
+    "name": "מבצע שלמה",
+    "img": "img/6c7cb6c7acf7.jpg"
+   },
+   {
+    "name": "מלחמת המפרץ",
+    "img": "img/920c18ada2f2.jpg"
+   },
+   {
+    "name": "השקת האייפון הראשון",
+    "img": "img/180ccbbac0b4.jpg"
+   },
+   {
+    "name": "החתונה של הנסיך ויליאם וקייט",
+    "img": "img/c0aceee338be.jpg"
+   },
+   {
+    "name": "מותה של הנסיכה דיאנה",
+    "img": "img/f67264aa11f6.jpg"
+   },
+   {
+    "name": "השריפה בנוטרדאם",
+    "img": "img/352255af8977.jpg"
+   },
+   {
+    "name": "התפרצות הר וזוב בפומפיי",
+    "img": "img/06b297e41397.jpg"
+   }
+  ]
+ },
+ {
+  "id": "bible",
+  "name": "תנ\"ך",
+  "cover": "img/a97b3d7aaab2.jpg",
+  "items": [
+   {
+    "name": "אדם וחוה",
+    "img": "img/a97b3d7aaab2.jpg"
+   },
+   {
+    "name": "תיבת נח",
+    "img": "img/ce76786c2f2a.jpg"
+   },
+   {
+    "name": "מגדל בבל",
+    "img": "img/ea61791d1a19.jpg"
+   },
+   {
+    "name": "אברהם אבינו",
+    "img": "img/c9af96c05921.jpg"
+   },
+   {
+    "name": "עקדת יצחק",
+    "img": "img/f7c6fe8574e9.jpg"
+   },
+   {
+    "name": "סולם יעקב",
+    "img": "img/cb7a53394d0f.jpg"
+   },
+   {
+    "name": "יוסף וכתונת הפסים",
+    "img": "img/58ddd4fe38d0.jpg"
+   },
+   {
+    "name": "משה רבנו",
+    "img": "img/a681979bbd6b.jpg"
+   },
+   {
+    "name": "קריעת ים סוף",
+    "img": "img/b0467ff21f34.jpg"
+   },
+   {
+    "name": "עשרת הדיברות",
+    "img": "img/21132fe41aef.jpg"
+   },
+   {
+    "name": "עגל הזהב",
+    "img": "img/79732a9ab4c3.jpg"
+   },
+   {
+    "name": "שמשון הגיבור",
+    "img": "img/411da68f378e.jpg"
+   },
+   {
+    "name": "דוד וגוליית",
+    "img": "img/6e1529bd79ad.jpg"
+   },
+   {
+    "name": "דוד המלך",
+    "img": "img/464e07afc9e4.jpg"
+   },
+   {
+    "name": "שלמה המלך",
+    "img": "img/161a5ffcff82.jpg"
+   },
+   {
+    "name": "יונה והדג",
+    "img": "img/ae8989a8f472.jpg"
+   },
+   {
+    "name": "דניאל בגוב האריות",
+    "img": "img/65e21d08ab36.jpg"
+   },
+   {
+    "name": "אסתר המלכה",
+    "img": "img/2b1d226f59ef.jpg"
+   },
+   {
+    "name": "אליהו הנביא",
+    "img": "img/01c3012a4b4c.jpg"
+   },
+   {
+    "name": "קין והבל",
+    "img": "img/75d7e02b6fa0.jpg"
+   },
+   {
+    "name": "סדום ועמורה",
+    "img": "img/f5f49d85d8ab.jpg"
+   },
+   {
+    "name": "חומות יריחו",
+    "img": "img/2b56212d9429.jpg"
+   },
+   {
+    "name": "רות",
+    "img": "img/13bc80b2ae2d.jpg"
+   },
+   {
+    "name": "שאול המלך",
+    "img": "img/adc9b28bd8df.jpg"
+   },
+   {
+    "name": "דבורה הנביאה",
+    "img": "img/a703d6d14769.jpg"
+   },
+   {
+    "name": "גן עדן",
+    "img": "img/38c3670ca13f.jpg"
+   },
+   {
+    "name": "עשר המכות",
+    "img": "img/a1efffdb9ff4.jpg"
+   },
+   {
+    "name": "המנורה",
+    "img": "img/c4c24640b21a.jpg"
+   },
+   {
+    "name": "בית המקדש",
+    "img": "img/e9fc396242e6.jpg"
+   }
+  ]
+ },
+ {
+  "id": "art",
+  "name": "יצירות אמנות",
+  "cover": "img/fa0fa4cbecc2.jpg",
+  "items": [
+   {
+    "name": "המונה ליזה",
+    "img": "img/fa0fa4cbecc2.jpg"
+   },
+   {
+    "name": "ליל כוכבים",
+    "img": "img/88279a443242.jpg"
+   },
+   {
+    "name": "הצעקה",
+    "img": "img/6b0a12eeeab7.jpg"
+   },
+   {
+    "name": "הסעודה האחרונה",
+    "img": "img/f40738793440.jpg"
+   },
+   {
+    "name": "נערה עם עגיל פנינה",
+    "img": "img/02266d2d2b32.jpg"
+   },
+   {
+    "name": "הולדת ונוס",
+    "img": "img/2cac74b0f4a8.jpg"
+   },
+   {
+    "name": "בריאת האדם",
+    "img": "img/2254183a6f66.jpg"
+   },
+   {
+    "name": "הנשיקה",
+    "img": "img/8f784880208f.jpg"
+   },
+   {
+    "name": "חמניות",
+    "img": "img/1826373791c7.jpg"
+   },
+   {
+    "name": "הגל הגדול של קנגאווה",
+    "img": "img/7d4a9a412803.jpg"
+   },
+   {
+    "name": "משמר הלילה",
+    "img": "img/138e9d2d4724.jpg"
+   },
+   {
+    "name": "החירות מובילה את העם",
+    "img": "img/1f31f7965899.jpg"
+   },
+   {
+    "name": "נפוליאון חוצה את האלפים",
+    "img": "img/8cdbf66f7e35.jpg"
+   },
+   {
+    "name": "ונוס ממילו",
+    "img": "img/23399a0e3c94.jpg"
+   },
+   {
+    "name": "הפסל דוד",
+    "img": "img/0b0e0c11bd5d.jpg"
+   },
+   {
+    "name": "האדם החושב",
+    "img": "img/c1a3c5fcbada.jpg"
+   },
+   {
+    "name": "גותיקה אמריקאית",
+    "img": "img/e8d4a7ae2c7d.jpg"
+   },
+   {
+    "name": "חבצלות המים",
+    "img": "img/7e551a225e5c.jpg"
+   },
+   {
+    "name": "גן התענוגות הארציים",
+    "img": "img/1687507b0a0f.jpg"
+   },
+   {
+    "name": "הפייטה",
+    "img": "img/855f46f27880.jpg"
+   },
+   {
+    "name": "טרסת בית הקפה בלילה",
+    "img": "img/b832eec79ddf.jpg"
+   },
+   {
+    "name": "לאס מנינאס",
+    "img": "img/ccf0c93a78e5.jpg"
+   },
+   {
+    "name": "ציידים בשלג",
+    "img": "img/7fcc54789bb9.jpg"
+   },
+   {
+    "name": "הנודד מעל ים הערפל",
+    "img": "img/ff4d6f8da3d6.jpg"
+   },
+   {
+    "name": "חדר השינה בארל",
+    "img": "img/00ac7df57688.jpg"
    }
   ]
  }

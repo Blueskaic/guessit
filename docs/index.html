@@ -217,8 +217,12 @@ $('all').onclick = () => {
   cfg.sel = selected().length === CATEGORIES.length ? [] : CATEGORIES.map(c => c.id);
   refresh();
 };
+// Full screen hides the URL bar on Android, but Chrome then shows its own "to exit full screen..." notice for a few
+// seconds. Enter it on the first tap in the menu so the notice doesn't cover the countdown. Home-screen installs
+// already open full screen, with no notice.
+if (!matchMedia('(display-mode: fullscreen), (display-mode: standalone)').matches)
+  addEventListener('click', () => { try { document.documentElement.requestFullscreen().catch(() => {}); } catch {} }, { once: true });
 $('start').onclick = () => {
-  try { document.documentElement.requestFullscreen().catch(() => {}); } catch {}  // hides the URL bar on Android; iPhone: use Add to Home Screen
   keepAwake();
   stats = { ok: 0, skip: 0 }; deck = [];
   track('rounds', 'r' + today(), cfg.nsfw ? 'rounds-nsfw' : 'rounds-clean', cfg.time ? 'rounds-timed' : 'rounds-free', ...cfg.sel.map(id => 'cat-' + id));

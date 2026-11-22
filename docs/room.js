@@ -26,10 +26,24 @@ let fb;  // promise of { fs: firestore module, db }
 const firebase = () => fb ||= Promise.all([import(SDK + 'firebase-app.js'), import(SDK + 'firebase-firestore.js')])
   .then(([app, fs]) => ({ fs, db: fs.getFirestore(app.initializeApp(CONFIG)) }));
 
-let players = null, unsub, unsubRoom, myBest = 0;
+let players = null, room = null, unsub, unsubRoom, myBest = 0;
 let adminId = null, isAdmin = false, pushed = '', pushTimer;  // the room admin's phone decides everyone's settings
 const same = s => JSON.stringify([s?.sel, s?.time, s?.prep, s?.nsfw]);  // Firestore may return map keys in another order
 const mine = () => { const c = game.cfg; return { sel: [...c.sel], time: c.time, prep: c.prep, nsfw: c.nsfw }; };
+const ms = t => t?.toMillis?.() ?? Date.now();  // a just-written server timestamp is still null locally
+
+// The admin is whoever the room names, as long as they're still in it. When the admin leaves (or a room predates admins),
+// the most recently active player still in the room takes over; every phone computes the same successor, and only that
+// player's phone writes the change.
+const successor = (exclude) => players?.filter(p => !p.left && p.id !== exclude).sort((a, b) => ms(b.updated) - ms(a.updated))[0];
+function checkAdmin(fs, db) {
+  if (!room || !players) return;
+  const admin = players.find(p => p.id === room.admin);
+  if (admin && !admin.left) return;
+  if (successor()?.id === st.pid)
+    fs.updateDoc(fs.doc(db, 'rooms', st.code), { admin: st.pid, owner: st.name, ...(room.settings ? {} : { settings: mine() }) })
+      .catch(e => console.warn(e));
+}
 
 async function listen() {
   unsub?.();
@@ -42,29 +56,29 @@ async function listen() {
   }
   unsubRoom?.();
   unsubRoom = fs.onSnapshot(fs.doc(db, 'rooms', st.code), snap => {
-    const d = snap.data() || {};
-    if (!d.admin && d.owner === st.name) {  // rooms opened before admins existed: the opener's phone claims it (allowed once)
-      fs.updateDoc(snap.ref, { admin: st.pid, settings: mine() }).catch(e => console.warn(e));
-      return;
-    }
+    const d = room = snap.data() || {};
+    st.owner = d.owner;  // the current admin's name
+    save();
     adminId = d.admin;
     isAdmin = d.admin === st.pid;
-    if (isAdmin) { pushed = same(d.settings); game.lock(null); }
+    if (isAdmin) { pushed = same(d.settings); game.lock(null, null, true); }  // a new admin carries on with the room's settings
     else game.lock(d.settings || null, d.owner);
+    checkAdmin(fs, db);
     render();
   }, e => console.warn(e));
   let summarize = true;  // once per app start, then after every change made from this phone
   unsub = fs.onSnapshot(fs.collection(db, 'rooms', st.code, 'players'), snap => {
     players = snap.docs.map(d => ({ id: d.id, ...d.data() }));
     myBest = players.find(p => p.id === st.pid)?.best || 0;
-    if (st.pub && (summarize || snap.metadata.hasPendingWrites)) { summarize = false; summary(fs, db); }
+    if (st.pub && (summarize || snap.metadata.hasPendingWrites)) { summarize = false; summary(fs, db, st.pub, st.owner, players); }
+    checkAdmin(fs, db);
     render();
   }, e => { console.warn(e); players = []; render(); });
 }
 
-function summary(fs, db) {
-  const total = k => players.reduce((n, p) => n + (p[k] || 0), 0);
-  fs.setDoc(fs.doc(db, 'roomlist', st.pub), { owner: st.owner, players: players.length, ok: total('ok'), rounds: total('rounds'),
+function summary(fs, db, pub, owner, list) {
+  const total = k => list.reduce((n, p) => n + (p[k] || 0), 0);
+  fs.setDoc(fs.doc(db, 'roomlist', pub), { owner, players: list.filter(p => !p.left).length, ok: total('ok'), rounds: total('rounds'),
     active: fs.serverTimestamp() }).catch(e => console.warn(e));
 }
 
@@ -79,9 +93,10 @@ function render() {
   $('rAdmin').textContent = isAdmin ? '👑 אתם מנהלי החדר: הקטגוריות וההגדרות שתבחרו חלות על כל השחקנים.'
     : adminId ? `👑 ${st.owner} מנהל/ת את החדר וקובע/ת את הקטגוריות וההגדרות.` : '';
   if (!players) { $('board').innerHTML = '<tr><td>טוען…</td></tr>'; return; }
-  const rows = [...players].sort((a, b) => b.ok - a.ok || b.best - a.best);
+  const rows = [...players].sort((a, b) => !!a.left - !!b.left || b.ok - a.ok || b.best - a.best);  // players who left go last
   $('board').innerHTML = '<tr><th>שחקן</th><th>ניחושים</th><th>שיא בסבב</th><th>זמן ממוצע</th><th>סבבים</th></tr>' +
-    rows.map((p, i) => `<tr${p.id === st.pid ? ' class="me"' : ''}><td>${['🥇', '🥈', '🥉'][i] || i + 1} ${esc(p.name)}${p.id === adminId ? ' 👑' : ''}</td>` +
+    rows.map((p, i) => `<tr class="${p.id === st.pid ? 'me' : ''} ${p.left ? 'left' : ''}"><td>${p.left ? '🚪' : ['🥇', '🥈', '🥉'][i] || i + 1} ` +
+      `${esc(p.name)}${p.left ? ' (יצא/ה)' : p.id === adminId ? ' 👑' : ''}</td>` +
       `<td>${p.ok}</td><td>${p.best}</td><td>${p.ok ? (p.secs / p.ok).toFixed(1) + ' שנ׳' : '–'}</td><td>${p.rounds}</td></tr>`).join('');
 }
 
@@ -111,8 +126,8 @@ async function join(isNew) {
       ({ owner, pub } = room.data());
     }
     const me = fs.doc(db, 'rooms', code, 'players', st.pid);
-    if ((await fs.getDoc(me)).exists()) await fs.updateDoc(me, { name, updated: fs.serverTimestamp() });  // rejoining keeps the score
-    else await fs.setDoc(me, { name, ok: 0, skip: 0, time: 0, rounds: 0, best: 0, secs: 0, updated: fs.serverTimestamp() });
+    if ((await fs.getDoc(me)).exists()) await fs.updateDoc(me, { name, left: false, updated: fs.serverTimestamp() });  // rejoining keeps the score
+    else await fs.setDoc(me, { name, ok: 0, skip: 0, time: 0, rounds: 0, best: 0, secs: 0, left: false, updated: fs.serverTimestamp() });
     Object.assign(st, { name, code, owner, pub });
     save();
     fail('');
@@ -159,12 +174,21 @@ dlg.onclick = e => { if (e.target === dlg) dlg.close(); };  // click outside = c
 $('rJoin').onclick = () => join(false);
 $('rNew').onclick = () => join(true);
 $('rCode').oninput = e => { e.target.value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, ''); };
-const leave = () => {
+// Leaving marks you as left (your score stays, and comes back if you rejoin). An admin who leaves hands over to the
+// most recently active player still in the room.
+async function leave() {
+  const { code, pub, owner } = st, list = players || [], wasAdmin = isAdmin, next = successor(st.pid);
   unsub?.(); unsubRoom?.();
   delete st.code; delete st.pub; save();
-  adminId = null; isAdmin = false;
+  players = room = adminId = null; isAdmin = false;
   game.lock(null);  // back to this phone's own settings
-};  // the score stays in the room if you come back
+  try {
+    const { fs, db } = await firebase();
+    await fs.updateDoc(fs.doc(db, 'rooms', code, 'players', st.pid), { left: true, updated: fs.serverTimestamp() });
+    if (wasAdmin && next) await fs.updateDoc(fs.doc(db, 'rooms', code), { admin: next.id, owner: next.name });
+    if (pub) summary(fs, db, pub, wasAdmin && next ? next.name : owner, list.map(p => p.id === st.pid ? { ...p, left: true } : p));
+  } catch (e) { console.warn(e); }
+}
 $('rLeave').onclick = () => { leave(); render(); };
 $('rShare').onclick = async () => {
   const url = `${location.origin}${location.pathname}?room=${st.code}`;

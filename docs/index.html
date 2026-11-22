@@ -63,6 +63,7 @@ dialog .txt { display:block; width:100%; margin-top:6px; padding:12px 14px; bord
 #board td { text-align:center; padding:8px 4px; white-space:nowrap; border-top:1px solid rgba(255,255,255,.1); font-variant-numeric:tabular-nums; }
 #board td:first-child, #board th:first-child { text-align:right; }
 #board tr.me td { color:var(--a2); font-weight:800; }
+#board tr.left td { opacity:.45; }
 dialog .row { justify-content:center; margin-top:14px; }
 dialog .row .btn { margin:0; }
 .slider { display:flex; align-items:center; gap:10px; direction:ltr; margin-top:4px; }
@@ -196,10 +197,10 @@ try { Object.assign(cfg, JSON.parse(localStorage.guessit || '{}')); } catch {}
 // In a room, the room admin's settings replace this phone's own (kept aside in `own`) until leaving the room.
 let own = null, lockedBy = null;
 const saveCfg = () => { try { localStorage.guessit = JSON.stringify(own || cfg); } catch {} };
-function roomLock(settings, admin) {
+function roomLock(settings, admin, keep) {  // keep: becoming the admin, so the room's current settings become this phone's own
   const before = JSON.stringify(cfg);
   if (settings) { own ||= { ...cfg, sel: [...cfg.sel] }; Object.assign(cfg, settings); }
-  else if (own) { Object.assign(cfg, own); own = null; }
+  else if (own) { if (!keep) Object.assign(cfg, own); own = null; }
   lockedBy = settings ? admin : null;
   if (JSON.stringify(cfg) !== before) deck = [];
   for (const k of ['time', 'prep']) $(k).value = cfg[k];

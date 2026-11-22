@@ -12,11 +12,12 @@ service cloud.firestore {
         && validPub(request.resource.data.pub)
         && validId(request.resource.data.admin)
         && validSettings(request.resource.data.settings);
-      // Settings can change any time (the game offers it only on the admin's phone).
-      // pub and admin can be added once, to rooms made before they existed.
-      allow update: if changed().hasOnly(['pub', 'admin', 'settings'])
+      // Settings change from the admin's phone; admin + owner (the admin's name) change when the admin leaves.
+      // pub can be added once, to rooms made before it existed.
+      allow update: if changed().hasOnly(['pub', 'admin', 'owner', 'settings'])
         && (!changed().hasAny(['pub']) || (!('pub' in resource.data) && validPub(request.resource.data.pub)))
-        && (!changed().hasAny(['admin']) || (!('admin' in resource.data) && validId(request.resource.data.admin)))
+        && (!changed().hasAny(['admin']) || validId(request.resource.data.admin))
+        && (!changed().hasAny(['owner']) || validName(request.resource.data.owner))
         && (!changed().hasAny(['settings']) || validSettings(request.resource.data.settings));
 
       match /players/{pid} {
@@ -70,8 +71,9 @@ service cloud.firestore {
     function roomExists(code) { return exists(/databases/$(database)/documents/rooms/$(code)); }
     function validName(n) { return n is string && n.size() > 0 && n.size() <= 20; }
     function validPlayer(d) {
-      return d.keys().hasOnly(['name', 'ok', 'skip', 'time', 'rounds', 'best', 'secs', 'updated'])
+      return d.keys().hasOnly(['name', 'ok', 'skip', 'time', 'rounds', 'best', 'secs', 'updated', 'left'])
         && validName(d.name)
+        && (!('left' in d) || d.left is bool)
         && d.ok is int && d.skip is int && d.time is int && d.rounds is int && d.best is int && d.secs is number
         && d.updated == request.time;
     }

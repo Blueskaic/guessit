@@ -1,0 +1,31 @@
+rules_version = '2';
+// GuessIt rooms. Paste into Firebase console > Firestore Database > Rules, then Publish.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // A room can be opened only by someone who knows its code (no listing of rooms) and never changes once created.
+    match /rooms/{code} {
+      allow get: if true;
+      allow create: if code.matches('[A-Z2-9]{5}')
+        && request.resource.data.keys().hasOnly(['owner', 'created'])
+        && validName(request.resource.data.owner)
+        && request.resource.data.created == request.time;
+
+      match /players/{pid} {
+        allow read: if roomExists(code);
+        allow create: if roomExists(code) && pid.size() <= 40
+          && request.resource.data.keys().hasAll(['name', 'ok', 'skip', 'time', 'rounds', 'best', 'secs', 'updated'])
+          && validPlayer(request.resource.data);
+        allow update: if validPlayer(request.resource.data);
+      }
+    }
+
+    function roomExists(code) { return exists(/databases/$(database)/documents/rooms/$(code)); }
+    function validName(n) { return n is string && n.size() > 0 && n.size() <= 20; }
+    function validPlayer(d) {
+      return d.keys().hasOnly(['name', 'ok', 'skip', 'time', 'rounds', 'best', 'secs', 'updated'])
+        && validName(d.name)
+        && d.ok is int && d.skip is int && d.time is int && d.rounds is int && d.best is int && d.secs is number
+        && d.updated == request.time;
+    }
+  }
+}

@@ -47,6 +47,24 @@ dialog label b { font-size:20px; color:#fff; }
 .check span { color:#fff; font-weight:700; }
 .check small { display:block; font-weight:400; color:var(--muted); font-size:13px; }
 .check input { width:26px; height:26px; flex:none; accent-color:var(--a1); }
+
+/* rooms */
+dialog .hint { color:var(--muted); font-size:14px; line-height:1.4; margin-bottom:4px; }
+dialog .txt { display:block; width:100%; margin-top:6px; padding:12px 14px; border:0; border-radius:12px; background:rgba(255,255,255,.1); color:#fff; font:inherit; font-size:18px; -webkit-user-select:text; user-select:text; }
+.join { display:flex; gap:8px; align-items:center; }
+.join .txt { flex:1; text-align:center; letter-spacing:4px; }
+.join .btn { margin:6px 0 0; padding:12px 22px; }
+.or { text-align:center; color:var(--muted); margin-top:12px; font-size:14px; }
+.err { color:#ff9a9a; text-align:center; min-height:1.2em; margin-top:8px; font-size:14px; }
+.code { display:flex; align-items:center; gap:10px; margin:4px 0 8px; color:var(--muted); }
+.code b { font-size:26px; color:#fff; letter-spacing:3px; }
+#board { width:100%; border-collapse:collapse; font-size:14px; }
+#board th { color:var(--muted); font-weight:600; font-size:12px; padding:4px; }
+#board td { text-align:center; padding:8px 4px; white-space:nowrap; border-top:1px solid rgba(255,255,255,.1); font-variant-numeric:tabular-nums; }
+#board td:first-child, #board th:first-child { text-align:right; }
+#board tr.me td { color:var(--a2); font-weight:800; }
+dialog .row { justify-content:center; margin-top:14px; }
+dialog .row .btn { margin:0; }
 .slider { display:flex; align-items:center; gap:10px; direction:ltr; margin-top:4px; }
 .slider input { flex:1; height:32px; accent-color:var(--a1); }
 .slider button { width:42px; height:42px; flex:none; border-radius:50%; background:rgba(255,255,255,.14); font-size:24px; font-weight:700; }
@@ -97,6 +115,7 @@ dialog .btn { display:block; margin:16px auto 0; background:linear-gradient(90de
   <header>
     <div class="logo" id="logo">GuessIt?</div>
     <div class="grow"></div>
+    <button class="pill" id="roomBtn">👥 חדר</button>
     <button class="pill" id="setBtn" onclick="$('settings').showModal()"></button>
     <button class="pill" id="all"></button>
   </header>
@@ -112,6 +131,26 @@ dialog .btn { display:block; margin:16px auto 0; background:linear-gradient(90de
   <div class="slider"><button data-for="prep" data-step="-1">−</button><input type="range" id="prep" min="1" max="15" step="1"><button data-for="prep" data-step="1">+</button></div>
   <label class="check"><span>🔞 מצב 18+<small>מוסיף קלפים גסים ומביכים לקטגוריות</small></span><input type="checkbox" id="nsfw"></label>
   <button class="btn" autofocus onclick="$('settings').close()">שמור</button>
+</div></dialog>
+
+<dialog id="roomDlg"><div class="in">
+  <div id="roomOut">
+    <h3>👥 חדר חברים</h3>
+    <p class="hint">פותחים חדר, שולחים את הקוד לחברים, וכל אחד משחק מהטלפון שלו. כל ניחוש נכנס לטבלה משותפת.</p>
+    <label>השם שלך</label>
+    <input class="txt" id="rName" maxlength="20" placeholder="איך קוראים לך?" autocomplete="nickname">
+    <label>יש לכם קוד?</label>
+    <div class="join"><input class="txt" id="rCode" maxlength="5" placeholder="ABCDE" dir="ltr" autocomplete="off" autocapitalize="characters"><button class="btn" id="rJoin">הצטרפות</button></div>
+    <div class="or">או</div>
+    <button class="btn ghost" id="rNew">פתיחת חדר חדש</button>
+    <p class="err" id="rErr"></p>
+  </div>
+  <div id="roomIn" hidden>
+    <h3>👥 <span id="rTitle"></span></h3>
+    <div class="code">קוד החדר: <b id="rShow" dir="ltr"></b><button class="pill" id="rShare">שיתוף 🔗</button></div>
+    <table id="board"></table>
+    <div class="row"><button class="btn" onclick="$('roomDlg').close()">סגירה</button><button class="btn ghost" id="rLeave">יציאה מהחדר</button></div>
+  </div>
 </div></dialog>
 
 <section id="count" class="screen">
@@ -143,6 +182,7 @@ dialog .btn { display:block; margin:16px auto 0; background:linear-gradient(90de
 </section>
 
 <script src="cards.js"></script>
+<script type="module" src="room.js"></script>
 <script>
 const GRACE_MS = 800;   // ignore taps right after the card appears (bumps while lifting)
 const VERDICTS = { ok: 'ניחשתם! 🎉', skip: 'דילגתם', time: 'נגמר הזמן! ⏰' };
@@ -225,6 +265,7 @@ if (!matchMedia('(display-mode: fullscreen), (display-mode: standalone)').matche
 $('start').onclick = () => {
   keepAwake();
   stats = { ok: 0, skip: 0 }; deck = [];
+  window.room?.round();
   track('rounds', 'r' + today(), cfg.nsfw ? 'rounds-nsfw' : 'rounds-clean', cfg.time ? 'rounds-timed' : 'rounds-free', ...cfg.sel.map(id => 'cat-' + id));
   next();
 };
@@ -310,6 +351,7 @@ function finish(kind) {
   $('took').textContent = `⏱ ${secs < 60 ? secs.toFixed(1) + ' שניות' : fmt(Math.round(secs)) + ' דקות'}`;
   track('res-' + kind, ...(kind === 'ok' ? ['t' + [60, 30, 20, 10, 5, 0].find(b => secs >= b)] : []));
   if (kind === 'ok') stats.ok++; else stats.skip++;
+  window.room?.result(kind, secs, stats.ok);
   if (kind === 'ok') { beep(660, 140); beep(990, 260, 'sine', 0.25, 0.13); buzz(80); }
   else if (kind === 'skip') { beep(330, 220, 'triangle'); buzz(60); }
   else { beep(220, 600, 'sawtooth', 0.15); buzz([200, 100, 200]); }

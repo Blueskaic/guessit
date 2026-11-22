@@ -10,6 +10,12 @@ Pick one or more categories and a time limit, press start, put the phone on your
 Others see the picture and the name. Tap the right half when you guess it, the left half to skip.
 The ⚙️ settings set the time per card, the countdown and 18+ mode (extra adult cards, and the game is renamed "אבטל הבולבול").
 
+## Rooms (friends leaderboard)
+👥 on the home screen: one player opens a room and shares the 5-letter code or invite link, friends join with a name on their own phones.
+Every round and card result goes to the room's leaderboard (cards guessed, best round, average guess time, rounds).
+Stored in Firebase Firestore, project `avtalbulbul` (`docs/room.js`). Access rules are in `firestore.rules`: paste them into
+Firebase console > Firestore Database > Rules after changing them.
+
 ## Analytics
 https://blueskaic.github.io/guessit/analytics/ shows plays, visits, popular categories, guess times and devices.
 Counts are anonymous counters on the free Abacus API (abacus.jasoncameron.dev, namespace `guessit-q7k2m9`); only hits from the github.io site count.

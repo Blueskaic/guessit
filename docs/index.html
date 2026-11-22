@@ -224,7 +224,7 @@ function track(total, daily = []) {
 }
 {
   let first = false;
-  try { first = !localStorage.guessitSeen; localStorage.guessitSeen = 1; } catch {}
+  try { first = !localStorage.guessitCounted; localStorage.guessitCounted = 1; } catch {}
   const ua = navigator.userAgent;
   const dev = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1) ? 'ios' : /Android/.test(ua) ? 'android' : 'desktop';
   track(['visits', ...(first ? ['visitors', 'dev_' + dev] : [])], ['visits']);

@@ -1272,6 +1272,74 @@ const CATEGORIES = [
     "img": "img/77f212a8a836.jpg"
    },
    {
+    "name": "הברווז של דודו גבע",
+    "img": "img/4f8e48379448.jpg"
+   },
+   {
+    "name": "קופיקו",
+    "img": "img/aaab8d270f98.jpg"
+   },
+   {
+    "name": "קישקשתא",
+    "img": "img/bce256d6a03e.jpg"
+   },
+   {
+    "name": "קיפי בן קיפוד",
+    "img": "img/1a9274f2603a.jpg"
+   },
+   {
+    "name": "מוישה אופניק",
+    "img": "img/69463400e966.jpg"
+   },
+   {
+    "name": "אריק ובנץ",
+    "img": "img/988e427c5c6f.jpg"
+   },
+   {
+    "name": "החתול שמיל",
+    "img": "img/c3474e72d682.jpg"
+   },
+   {
+    "name": "סמי וסוסו",
+    "img": "img/85c13d0dffcb.jpg"
+   },
+   {
+    "name": "דודלי ופיסטוק",
+    "img": "img/4228f0000462.jpg"
+   },
+   {
+    "name": "זאק וקוואק",
+    "img": "img/3cbba70289f6.jpg"
+   },
+   {
+    "name": "זבנג!",
+    "img": "img/e6ef76abab95.jpg"
+   },
+   {
+    "name": "הביגבגים",
+    "img": "img/648eb217a9ca.jpg"
+   },
+   {
+    "name": "הקונצונים",
+    "img": "img/9965a3ad2095.jpg"
+   },
+   {
+    "name": "נחשון כל יכול",
+    "img": "img/f3e9efb3bb90.jpg"
+   },
+   {
+    "name": "החרצופים",
+    "img": "img/5b995b032e20.jpg"
+   },
+   {
+    "name": "פלוטו מאיה פלוטו",
+    "img": "img/b158acd3fd60.jpg"
+   },
+   {
+    "name": "שמוליקיפוד",
+    "img": "img/65728b9a0569.jpg"
+   },
+   {
     "name": "וודי נקר העצים",
     "img": "img/15c172393f75.jpg"
    },
